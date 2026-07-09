@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mis Gastos · Dashboard</title>
+<style>
+  :root{
+    --bg:#0b0f19; --panel:#141a29; --panel2:#1b2334; --line:#26304a;
+    --txt:#e8ecf5; --muted:#8b97b3; --accent:#5b8cff; --accent2:#22c98f;
+    --danger:#ff6b6b; --radius:16px; --font:'Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:radial-gradient(1200px 600px at 70% -10%,#1a2540 0%,var(--bg) 55%);
+       color:var(--txt);font-family:var(--font);min-height:100vh;padding:32px 20px}
+  .wrap{max-width:900px;margin:0 auto}
+  header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+  h1{font-size:1.6rem;font-weight:700;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:.85rem;margin-top:4px}
+  .hero{background:linear-gradient(135deg,var(--panel) 0%,var(--panel2) 100%);
+        border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin-bottom:24px}
+  .hero .label{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+  .hero .big{font-size:2.8rem;font-weight:800;margin-top:6px;color:var(--accent2)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  .stat .n{font-size:1.5rem;font-weight:700}
+  .stat .l{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .day{margin-bottom:20px}
+  .day h2{font-size:1rem;font-weight:600;color:var(--muted);margin-bottom:10px;
+          display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:6px}
+  .row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--panel);
+       border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+  .row .ico{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+            background:var(--panel2);font-size:1.1rem;flex:0 0 auto}
+  .row .info{flex:1;min-width:0}
+  .row .dest{font-weight:600}
+  .row .meta{color:var(--muted);font-size:.78rem;margin-top:2px}
+  .row .amt{font-weight:700;font-size:1.05rem;white-space:nowrap}
+  footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:32px;line-height:1.6}
+  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);
+        border-radius:999px;padding:3px 10px;font-size:.72rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1 id="title">Mis Gastos</h1>
+      <div class="sub">Actualizado automáticamente · <span id="updated">—</span></div>
+    </div>
+    <span class="pill">🤖 auto · Raspberry Pi + qwen3</span>
+  </header>
+
+  <div class="hero">
+    <div class="label">Total registrado</div>
+    <div class="big" id="grandTotal">—</div>
+  </div>
+
+  <div class="grid" id="stats"></div>
+
+  <div id="days"></div>
+
+  <footer>
+    Generado y actualizado de forma autónoma desde correos bancarios.<br>
+    Datos sanitizados (sin RUT ni números de cuenta).
+  </footer>
+</div>
+
+<script>
+const fmt = n => "$" + n.toLocaleString("es-CL");
+const ICON = {transferencia:"↗", compra:"🛒", pago:"💳", giro:"🏧", otro:"•"};
+
+fetch("./data/cargos.json?t=" + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById("title").textContent = d.titulo || "Mis Gastos";
+    document.getElementById("updated").textContent =
+      new Date(d.actualizado).toLocaleString("es-CL");
+    const cargos = d.cargos || [];
+    const total = cargos.reduce((s,c)=>s+(c.monto||0),0);
+    document.getElementById("grandTotal").textContent = fmt(total);
+
+    // stats
+    const byType = {};
+    cargos.forEach(c => byType[c.tipo]=(byType[c.tipo]||0)+c.monto);
+    const stats = document.getElementById("stats");
+    stats.innerHTML =
+      `<div class="stat"><div class="n">${cargos.length}</div><div class="l">Movimientos</div></div>` +
+      `<div class="stat"><div class="n">${Object.keys(groupBy(cargos)).length}</div><div class="l">Días</div></div>` +
+      Object.entries(byType).map(([t,v])=>
+        `<div class="stat"><div class="n">${fmt(v)}</div><div class="l">${t}</div></div>`).join("");
+
+    // por día
+    const groups = groupBy(cargos);
+    const days = document.getElementById("days");
+    days.innerHTML = Object.keys(groups).sort().reverse().map(fecha => {
+      const items = groups[fecha];
+      const dTotal = items.reduce((s,c)=>s+c.monto,0);
+      return `<div class="day"><h2><span>${fecha}</span><span>${fmt(dTotal)}</span></h2>` +
+        items.map(c=>`
+          <div class="row">
+            <div class="ico">${ICON[c.tipo]||"•"}</div>
+            <div class="info">
+              <div class="dest">${c.destino||"—"}</div>
+              <div class="meta">${c.hora||""} · ${c.tipo}</div>
+            </div>
+            <div class="amt">${fmt(c.monto)}</div>
+          </div>`).join("") + `</div>`;
+    }).join("");
+  })
+  .catch(e => {
+    document.getElementById("grandTotal").textContent = "error";
+    console.error(e);
+  });
+
+function groupBy(cargos){
+  const g={};
+  cargos.forEach(c=>{(g[c.fecha]=g[c.fecha]||[]).push(c)});
+  return g;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "titulo": "Mis Gastos",
+  "moneda": "CLP",
+  "actualizado": "2026-07-09T18:35:00-04:00",
+  "cargos": [
+    { "fecha": "2026-07-09", "hora": "14:56", "tipo": "transferencia", "destino": "Piercing", "monto": 3000 }
+  ]
+}
