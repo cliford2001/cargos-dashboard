@@ -1,8 +1,79 @@
 {
   "titulo": "Mis Gastos",
   "moneda": "CLP",
-  "actualizado": "2026-07-09T18:35:00-04:00",
+  "actualizado": "2026-07-09T18:50:05.495632-04:00",
   "cargos": [
-    { "fecha": "2026-07-09", "hora": "14:56", "tipo": "transferencia", "destino": "Piercing", "monto": 3000 }
+    {
+      "uid": "1951",
+      "fecha": "2026-06-26",
+      "hora": "21:13",
+      "tipo": "transferencia",
+      "destino": "NAUTA",
+      "monto": 200000
+    },
+    {
+      "uid": "1952",
+      "fecha": "2026-06-27",
+      "hora": "01:01",
+      "tipo": "pago",
+      "destino": "Tarjeta: WORLDMEMBER VISA",
+      "monto": 105842
+    },
+    {
+      "uid": "1958",
+      "fecha": "2026-06-27",
+      "hora": "15:52",
+      "tipo": "transferencia",
+      "destino": "Matias Rodrigo Vergara Arroyo",
+      "monto": 10000
+    },
+    {
+      "uid": "1964",
+      "fecha": "2026-07-01",
+      "hora": "13:26",
+      "tipo": "transferencia",
+      "destino": "Emanuel",
+      "monto": 15000
+    },
+    {
+      "uid": "1968",
+      "fecha": "2026-07-01",
+      "hora": "19:09",
+      "tipo": "transferencia",
+      "destino": "Khipu CLBS F",
+      "monto": 40855
+    },
+    {
+      "uid": "1969",
+      "fecha": "2026-07-02",
+      "hora": "14:24",
+      "tipo": "transferencia",
+      "destino": "Patriciio",
+      "monto": 5000
+    },
+    {
+      "uid": "1974",
+      "fecha": "2026-07-05",
+      "hora": "11:00",
+      "tipo": "transferencia",
+      "destino": "Joserut",
+      "monto": 195000
+    },
+    {
+      "uid": "1977",
+      "fecha": "2026-07-07",
+      "hora": "18:12",
+      "tipo": "transferencia",
+      "destino": "Matias Rodrigo Vergara Arroyo",
+      "monto": 29000
+    },
+    {
+      "uid": "1984",
+      "fecha": "2026-07-09",
+      "hora": "14:56",
+      "tipo": "transferencia",
+      "destino": "Piercing",
+      "monto": 3000
+    }
   ]
 }
