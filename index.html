@@ -12,18 +12,22 @@
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased; font-weight:400; letter-spacing:0.01em; text-rendering:optimizeLegibility; font-feature-settings: 'kern', 'liga', 'clig', 'calt'
+    background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased; font-weight:400; letter-spacing:0.01em; text-rendering:optimizeLegibility; font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+    transition: background 0.3s, color 0.3s;
+  }
   .wrap{max-width:760px;margin:0 auto;padding:24px 16px 60px}
   header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
   .brand{font-weight:800;font-size:1.5rem;letter-spacing:-.03em; line-height:1.2}
   .brand span{color:var(--accent); font-weight:800; letter-spacing:-.04em; display:inline-block; transform:scaleX(1.05)}
   .period{font-size:.8rem;color:var(--mut)}
-  .hero{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:16px}
+  .hero{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:16px; transition: transform 0.2s ease, box-shadow 0.2s ease}
+  .hero:hover{transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2)}
   .hero .lbl{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.08em}
   .hero .big{font-size:3.2rem;font-weight:800;letter-spacing:-.04em;margin-top:8px; font-variation-settings: 'wght' 700; line-height:1.1}
   .hero .big.neg{color:var(--out)} .hero .big.pos{color:var(--in)}
   .io{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-  .io .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .io .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px; transition: transform 0.2s ease, background 0.2s ease}
+  .io .box:hover{transform: translateY(-2px); background:color-mix(in srgb,var(--card) 12%,transparent)}
   .io .k{font-size:.78rem;color:var(--mut);display:flex;align-items:center;gap:6px}
   .io .dot{width:9px;height:9px;border-radius:50%}
   .io .in .dot{background:var(--in)} .io .out .dot{background:var(--out)}
@@ -32,12 +36,12 @@
   .daygrp{margin-top:22px}
   .dayhead{display:flex;justify-content:space-between;align-items:baseline;
     font-size:.82rem;color:var(--mut);padding:0 4px 6px;border-bottom:1px solid var(--line);margin-bottom:6px}
-  .row{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line)}
+  .row{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line); transition: background 0.2s ease}
+  .row:hover{background:color-mix(in srgb,var(--card) 10%,transparent)}
   .row:last-child{border-bottom:none}
   .ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
     font-size:1.05rem;flex:0 0 auto}
-  .ico.in{background:color-mix(in srgb,var(--in) 18%,transparent);color:var(--in)}
-  .ico.out{background:color-mix(in srgb,var(--out) 16%,transparent);color:var(--out)}
+  .ico.in{background:color-mix(in srgb,var(--in) 18%,transparent);color:var(--in)} .ico.out{background:color-mix(in srgb,var(--out) 16%,transparent);color:var(--out)}
   .meta{flex:1;min-width:0}
   .dest{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .sub{font-size:.76rem;color:var(--mut)}
@@ -48,10 +52,28 @@
     padding:2px 7px;border-radius:999px;margin-left:6px}
   footer{margin-top:36px;text-align:center;font-size:.72rem;color:var(--mut)}
   .empty{text-align:center;color:var(--mut);padding:40px 0}
+  .loader{display:flex;justify-content:center;padding:40px 0;opacity:0;transition:opacity 0.3s}
+  .loader.active{opacity:1}
+  .loader span{width:8px;height:8px;border-radius:50%;background:var(--accent);margin:0 4px;animation:spinner 1.2s infinite linear;
+    animation-delay:calc(0.2s * var(--i));
+  }
+  @keyframes spinner{
+    0%{transform:rotate(0deg) scale(1)}
+    50%{transform:rotate(180deg) scale(1.2)}
+    100%{transform:rotate(360deg) scale(1)}
+  }
 </style>
 <div class="wrap">
   <header>
-    <div class="brand">Mis<span>Finanzas</span></div>
+    <div class="brand">
+      <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="margin-right:12px; vertical-align: middle">
+        <rect width="40" height="40" fill="#1e3a8a"/>
+        <text x="20" y="26" font-family="Inter" font-size="16" font-weight="700" text-anchor="middle" fill="white">
+          C
+        </text>
+      </svg>
+      <span>MisFinanzas</span>
+    </div>
     <div class="period" id="period">—</div>
   </header>
 
@@ -65,7 +87,13 @@
     <div class="box out"><div class="k"><span class="dot"></span>Salidas</div><div class="v" id="salidas">$0</div></div>
   </div>
 
-  <div id="lista"></div>
+  <div id="lista">
+    <div class="loader" id="loader">
+      <span style="--i:1"></span>
+      <span style="--i:2"></span>
+      <span style="--i:3"></span>
+    </div>
+  </div>
 
   <footer>Datos sanitizados (sin RUT ni cuentas) · actualizado <span id="upd">—</span></footer>
 </div>
@@ -73,9 +101,14 @@
 const fmt = n => (n<0?"-":"") + "$" + Math.abs(n).toLocaleString("es-CL");
 const ICON = {compra:"🛒",transferencia:"↔",pago:"💳",giro:"🏧",sueldo:"💼",abono:"⬇",otro:"•"};
 
+// mostrar loader
+const loader = document.getElementById("loader");
+loader.classList.add("active");
+
 fetch("./data/cargos.json?t=" + Date.now())
   .then(r => r.json())
   .then(d => {
+    loader.classList.remove("active");
     // compat: esquema viejo usaba 'cargos' (todo salida)
     let movs = d.movimientos || (d.cargos||[]).map(c => ({...c, direccion:c.direccion||"salida"}));
     movs.sort((a,b)=> (a.fecha+ (a.hora||"")).localeCompare(b.fecha+(b.hora||"")));
@@ -84,7 +117,7 @@ fetch("./data/cargos.json?t=" + Date.now())
     let idx = -1;
     for (let i=movs.length-1;i>=0;i--){ if(movs[i].es_sueldo){ idx=i; break; } }
     const periodo = idx>=0 ? movs.slice(idx) : movs;
-    const desde = idx>=0 ? movs[idx].fecha : (movs[0]?.fecha || "—");
+    const desde = idx>=0 ? movs[idx].fecha : (movs[0]?.fecha || "");
 
     const ent = periodo.filter(m=>m.direccion==="entrada").reduce((s,m)=>s+m.monto,0);
     const sal = periodo.filter(m=>m.direccion==="salida").reduce((s,m)=>s+m.monto,0);
@@ -114,7 +147,7 @@ fetch("./data/cargos.json?t=" + Date.now())
         return `<div class="row">
           <div class="ico ${io}">${ICON[m.tipo]||ICON.otro}</div>
           <div class="meta">
-            <div class="dest">${m.destino||"—"}${m.es_sueldo?'<span class="badge">sueldo</span>':''}</div>
+            <div class="dest">${m.destino||"-"}${m.es_sueldo?'<span class="badge">sueldo</span>':''}</div>
             <div class="sub">${m.hora||""} · ${m.tipo||""}</div>
           </div>
           <div class="amt ${io}">${sign} ${fmt(m.monto).replace("$","$")}</div>
@@ -127,6 +160,7 @@ fetch("./data/cargos.json?t=" + Date.now())
     }).join("");
   })
   .catch(e => {
+    loader.classList.remove("active");
     document.getElementById("lista").innerHTML = '<div class="empty">No se pudieron cargar los datos.</div>';
   });
 </script>
