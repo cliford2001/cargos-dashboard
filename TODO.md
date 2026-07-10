@@ -1,7 +1,1 @@
-- [x] Leer index.html y data/cargos.json
-- [ ] Elegir una mejora acotada: tipografía y jerarquía visual
-- [ ] Aplicar mejora: usar Inter 700 para títulos, Inter 500 para cuerpo
-- [ ] Verificar que el fetch sigue intacto y los datos se muestran correctamente
-- [ ] Agregar línea a CHANGELOG.md con fecha y mejora
-- [ ] Ejecutar git add -A && git commit -m "diseño: mejora tipografía y jerarquía visual"
-- [ ] Ejecutar git pull --rebase && git push
+- [ ] Elegir 1-2 mejoras acotadas de diseño para aplicar
