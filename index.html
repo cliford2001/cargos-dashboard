@@ -1,388 +1,132 @@
-<!doctype html>
-<html lang="es">
-<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mis Gastos · Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Mis Finanzas</title>
 <style>
   :root{
-    --bg:#0b0f19; --panel:#141a29; --panel2:#1b2334; --line:#26304a;
-    --txt:#e8ecf5; --muted:#8b97b3; --accent:#5b8cff; --accent2:#22c98f;
-    --danger:#ff6b6b; --radius:16px;
-    --font-heading:'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-    --font-body:'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-    --text-light: #f1f4f9;
-    --text-dark: #333;
-    --shadow: 0 4px 20px rgba(0,0,0,0.2);
+    --bg:#0b0f14; --card:#141b24; --line:#1f2a37; --txt:#e6edf3; --mut:#8b98a5;
+    --in:#3fb950; --out:#f85149; --accent:#58a6ff;
   }
-  
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0b0f19;
-      --panel: #141a29;
-      --panel2: #1b2334;
-      --line: #26304a;
-      --txt: #e8ecf5;
-      --muted: #8b97b3;
-      --accent: #5b8cff;
-      --accent2: #22c98f;
-      --danger: #ff6b6b;
-      --radius: 16px;
-      --shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f8fa; --card:#ffffff; --line:#e5e9ee; --txt:#1b2733; --mut:#5b6673;
+      --in:#1a7f37; --out:#cf222e; --accent:#0969da; }
   }
-  
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #f5f7fa;
-      --panel: #ffffff;
-      --panel2: #f1f4f9;
-      --line: #e0e4eb;
-      --txt: #333;
-      --muted: #7d88a1;
-      --accent: #5b8cff;
-      --accent2: #22c98f;
-      --danger: #d64a4a;
-      --radius: 16px;
-      --shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-  }
-  
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  
-  body {
-    background: radial-gradient(1200px 600px at 70% -10%, #1a2540 0%, var(--bg) 55%);
-    color: var(--txt);
-    font-family: var(--font-body);
-    min-height: 100vh;
-    padding: 32px 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .wrap {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 12px;
-  }
-  
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  
-  h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    color: var(--txt);
-    margin-bottom: 4px;
-    font-family: var(--font-heading);
-    transition: font-weight 0.2s ease;
-  }
-  
-  h1:hover {
-    font-weight: 800;
-  }
-  
-  .sub {
-    color: var(--muted);
-    font-size: 0.85rem;
-    font-weight: 500;
-    line-height: 1.4;
-    font-family: var(--font-body);
-  }
-  
-  .hero {
-    background: linear-gradient(135deg, var(--panel) 0%, var(--panel2) 100%);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 28px;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-  }
-  
-  .hero .label {
-    color: var(--muted);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 600;
-    font-family: var(--font-body);
-  }
-  
-  .hero .big {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-top: 6px;
-    color: var(--accent2);
-    line-height: 1.2;
-    font-family: var(--font-heading);
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .hero:hover .big {
-    color: #33d9a3;
-    transform: translateY(-2px);
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-  
-  .stat {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 18px;
-    box-shadow: var(--shadow);
-    transition: all 0.2s ease;
-  }
-  
-  .stat:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.25);
-  }
-  
-  .stat .n {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--txt);
-    font-family: var(--font-heading);
-  }
-  
-  .stat .l {
-    color: var(--muted);
-    font-size: 0.78rem;
-    margin-top: 4px;
-    font-weight: 500;
-    font-family: var(--font-body);
-  }
-  
-  .day {
-    margin-bottom: 20px;
-    background: var(--panel);
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-  }
-  
-  .day h2 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--muted);
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 6px;
-    background: var(--panel2);
-    padding: 12px 14px;
-    font-family: var(--font-heading);
-  }
-  
-  .row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    margin-bottom: 8px;
-    transition: all 0.2s ease;
-  }
-  
-  .row:hover {
-    background: var(--panel2);
-    transform: translateX(4px);
-  }
-  
-  .row .ico {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
-    background: var(--panel2);
-    font-size: 1.1rem;
-    flex: 0 0 auto;
-    transition: all 0.2s ease;
-  }
-  
-  .row:hover .ico {
-    background: var(--accent2);
-    color: white;
-    transform: scale(1.1);
-  }
-  
-  .row .info {
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .row .dest {
-    font-weight: 600;
-    color: var(--txt);
-    font-size: 0.95rem;
-    font-family: var(--font-heading);
-  }
-  
-  .row .meta {
-    color: var(--muted);
-    font-size: 0.78rem;
-    margin-top: 2px;
-    font-weight: 400;
-    font-family: var(--font-body);
-  }
-  
-  .row .amt {
-    font-weight: 700;
-    font-size: 1.05rem;
-    white-space: nowrap;
-    color: var(--accent2);
-    font-family: var(--font-heading);
-  }
-  
-  footer {
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.75rem;
-    margin-top: 32px;
-    line-height: 1.6;
-    font-weight: 400;
-    font-family: var(--font-body);
-  }
-  
-  .pill {
-    display: inline-block;
-    background: var(--panel2);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 3px 10px;
-    font-size: 0.72rem;
-    color: var(--muted);
-    font-weight: 500;
-    font-family: var(--font-body);
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    body { padding: 20px 12px; }
-    .wrap { padding: 0; }
-    h1 { font-size: 1.6rem; }
-    .hero .big { font-size: 2.4rem; }
-    .stat { padding: 14px; }
-    .row { padding: 10px 12px; }
-    .row .ico { width: 32px; height: 32px; }
-    .row .dest { font-size: 0.9rem; }
-  }
-  
-  /* Fallback for missing Inter font */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Inter'), local('Inter Regular'), 'https://fonts.gstatic.com/s/inter/v12/UcC73zUu0000000IalCFOQ.woff2' format('woff2');
-  }
-  
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Inter Bold'), local('Inter-Bold'), 'https://fonts.gstatic.com/s/inter/v12/UcC73zUu0000000IalCFOQ.woff2' format('woff2');
-  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:24px 16px 60px}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+  .brand{font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+  .brand span{color:var(--accent)}
+  .period{font-size:.8rem;color:var(--mut)}
+  .hero{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:16px}
+  .hero .lbl{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.08em}
+  .hero .big{font-size:2.4rem;font-weight:800;letter-spacing:-.03em;margin-top:4px}
+  .hero .big.neg{color:var(--out)} .hero .big.pos{color:var(--in)}
+  .io{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+  .io .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .io .k{font-size:.78rem;color:var(--mut);display:flex;align-items:center;gap:6px}
+  .io .dot{width:9px;height:9px;border-radius:50%}
+  .io .in .dot{background:var(--in)} .io .out .dot{background:var(--out)}
+  .io .v{font-size:1.4rem;font-weight:700;margin-top:4px}
+  .io .in .v{color:var(--in)} .io .out .v{color:var(--out)}
+  .daygrp{margin-top:22px}
+  .dayhead{display:flex;justify-content:space-between;align-items:baseline;
+    font-size:.82rem;color:var(--mut);padding:0 4px 6px;border-bottom:1px solid var(--line);margin-bottom:6px}
+  .row{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:none}
+  .ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+    font-size:1.05rem;flex:0 0 auto}
+  .ico.in{background:color-mix(in srgb,var(--in) 18%,transparent);color:var(--in)}
+  .ico.out{background:color-mix(in srgb,var(--out) 16%,transparent);color:var(--out)}
+  .meta{flex:1;min-width:0}
+  .dest{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sub{font-size:.76rem;color:var(--mut)}
+  .amt{font-weight:700;white-space:nowrap}
+  .amt.in{color:var(--in)} .amt.out{color:var(--txt)}
+  .badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent);
+    padding:2px 7px;border-radius:999px;margin-left:6px}
+  footer{margin-top:36px;text-align:center;font-size:.72rem;color:var(--mut)}
+  .empty{text-align:center;color:var(--mut);padding:40px 0}
 </style>
-</head>
-<body>
 <div class="wrap">
   <header>
-    <div>
-      <h1 id="title">Mis Gastos</h1>
-      <div class="sub">Actualizado automáticamente · <span id="updated">—</span></div>
-    </div>
-    <span class="pill">🤖 auto · Raspberry Pi + qwen3</span>
+    <div class="brand">Mis<span>Finanzas</span></div>
+    <div class="period" id="period">—</div>
   </header>
 
   <div class="hero">
-    <div class="label">Total registrado</div>
-    <div class="big" id="grandTotal">—</div>
+    <div class="lbl">Balance del periodo</div>
+    <div class="big" id="balance">$0</div>
   </div>
 
-  <div class="grid" id="stats"></div>
+  <div class="io">
+    <div class="box in"><div class="k"><span class="dot"></span>Entradas</div><div class="v" id="entradas">$0</div></div>
+    <div class="box out"><div class="k"><span class="dot"></span>Salidas</div><div class="v" id="salidas">$0</div></div>
+  </div>
 
-  <div id="days"></div>
+  <div id="lista"></div>
 
-  <footer>
-    Generado y actualizado de forma autónoma desde correos bancarios.<br>
-    Datos sanitizados (sin RUT ni números de cuenta).
-  </footer>
+  <footer>Datos sanitizados (sin RUT ni cuentas) · actualizado <span id="upd">—</span></footer>
 </div>
-
 <script>
-const fmt = n => "$" + n.toLocaleString("es-CL");
-const ICON = {transferencia:"↗", compra:"🛒", pago:"💳", giro:"🏧", otro:"•"};
+const fmt = n => (n<0?"-":"") + "$" + Math.abs(n).toLocaleString("es-CL");
+const ICON = {compra:"🛒",transferencia:"↔",pago:"💳",giro:"🏧",sueldo:"💼",abono:"⬇",otro:"•"};
 
 fetch("./data/cargos.json?t=" + Date.now())
   .then(r => r.json())
   .then(d => {
-    document.getElementById("title").textContent = d.titulo || "Mis Gastos";
-    document.getElementById("updated").textContent =
-      new Date(d.actualizado).toLocaleString("es-CL");
-    const cargos = d.cargos || [];
-    const total = cargos.reduce((s,c)=>s+(c.monto||0),0);
-    document.getElementById("grandTotal").textContent = fmt(total);
+    // compat: esquema viejo usaba 'cargos' (todo salida)
+    let movs = d.movimientos || (d.cargos||[]).map(c => ({...c, direccion:c.direccion||"salida"}));
+    movs.sort((a,b)=> (a.fecha+ (a.hora||"")).localeCompare(b.fecha+(b.hora||"")));
 
-    // stats
-    const byType = {};
-    cargos.forEach(c => byType[c.tipo]=(byType[c.tipo]||0)+c.monto);
-    const stats = document.getElementById("stats");
-    stats.innerHTML =
-      `<div class="stat"><div class="n">${cargos.length}</div><div class="l">Movimientos</div></div>` +
-      `<div class="stat"><div class="n">${Object.keys(groupBy(cargos)).length}</div><div class="l">Días</div></div>` +
-      Object.entries(byType).map(([t,v])=>
-        `<div class="stat"><div class="n">${fmt(v)}</div><div class="l">${t}</div></div>`).join("");
+    // periodo salarial = desde el ultimo sueldo (es_sueldo) en adelante
+    let idx = -1;
+    for (let i=movs.length-1;i>=0;i--){ if(movs[i].es_sueldo){ idx=i; break; } }
+    const periodo = idx>=0 ? movs.slice(idx) : movs;
+    const desde = idx>=0 ? movs[idx].fecha : (movs[0]?.fecha || "—");
 
-    // por día
-    const groups = groupBy(cargos);
-    const days = document.getElementById("days");
-    days.innerHTML = Object.keys(groups).sort().reverse().map(fecha => {
-      const items = groups[fecha];
-      const dTotal = items.reduce((s,c)=>s+c.monto,0);
-      return `<div class="day"><h2><span>${fecha}</span><span>${fmt(dTotal)}</span></h2>` +
-        items.map(c=>`
-          <div class="row">
-            <div class="ico">${ICON[c.tipo]||"•"}</div>
-            <div class="info">
-              <div class="dest">${c.destino||"--"}</div>
-              <div class="meta">${c.hora||""} · ${c.tipo}</div>
-            </div>
-            <div class="amt">${fmt(c.monto)}</div>
-          </div>`).join("") + `</div>`;
+    const ent = periodo.filter(m=>m.direccion==="entrada").reduce((s,m)=>s+m.monto,0);
+    const sal = periodo.filter(m=>m.direccion==="salida").reduce((s,m)=>s+m.monto,0);
+    const bal = ent - sal;
+
+    document.getElementById("entradas").textContent = fmt(ent);
+    document.getElementById("salidas").textContent = fmt(sal);
+    const b = document.getElementById("balance");
+    b.textContent = fmt(bal); b.className = "big " + (bal>=0?"pos":"neg");
+    document.getElementById("period").textContent =
+      idx>=0 ? ("Periodo salarial desde " + desde) : ("Todos los movimientos desde " + desde);
+    document.getElementById("upd").textContent = (d.actualizado||"").slice(0,16).replace("T"," ");
+
+    const cont = document.getElementById("lista");
+    if(!periodo.length){ cont.innerHTML = '<div class="empty">Sin movimientos aún.</div>'; return; }
+
+    // agrupa por dia, mas reciente primero
+    const g = {};
+    periodo.forEach(m => (g[m.fecha]=g[m.fecha]||[]).push(m));
+    const dias = Object.keys(g).sort().reverse();
+    cont.innerHTML = dias.map(f => {
+      const items = g[f].slice().reverse();
+      const net = items.reduce((s,m)=> s + (m.direccion==="entrada"?m.monto:-m.monto), 0);
+      const rows = items.map(m => {
+        const io = m.direccion==="entrada" ? "in":"out";
+        const sign = m.direccion==="entrada" ? "+":"−";
+        return `<div class="row">
+          <div class="ico ${io}">${ICON[m.tipo]||ICON.otro}</div>
+          <div class="meta">
+            <div class="dest">${m.destino||"—"}${m.es_sueldo?'<span class="badge">sueldo</span>':''}</div>
+            <div class="sub">${m.hora||""} · ${m.tipo||""}</div>
+          </div>
+          <div class="amt ${io}">${sign} ${fmt(m.monto).replace("$","$")}</div>
+        </div>`;
+      }).join("");
+      return `<div class="daygrp">
+        <div class="dayhead"><span>${f}</span><span>${fmt(net)}</span></div>
+        ${rows}
+      </div>`;
     }).join("");
   })
   .catch(e => {
-    document.getElementById("grandTotal").textContent = "error";
-    console.error(e);
+    document.getElementById("lista").innerHTML = '<div class="empty">No se pudieron cargar los datos.</div>';
   });
-
-function groupBy(cargos){
-  const g={};
-  cargos.forEach(c=>{(g[c.fecha]=g[c.fecha]||[]).push(c)});
-  return g;
-}
 </script>
-</body>
-</html>
