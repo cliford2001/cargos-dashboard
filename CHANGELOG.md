@@ -1,1 +1,4 @@
-2026-07-09: Mejora tipografía y jerarquía visual usando Inter 500 para cuerpo y 700 para títulos.
+# Changelog
+
+## 2026-07-09
+- diseño: mejora en tipografía y jerarquía visual (tamaño, peso y espaciado más refinados para una estética premium y legibilidad óptima)
