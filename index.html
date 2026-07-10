@@ -12,7 +12,7 @@
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased; font-weight:400; letter-spacing:0.01em; text-rendering:optimizeLegibility; font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+    background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased; font-weight:500; letter-spacing:0.01em; text-rendering:optimizeLegibility; font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     transition: background 0.3s, color 0.3s;
   }
   .wrap{max-width:760px;margin:0 auto;padding:24px 16px 60px}
@@ -119,8 +119,8 @@ fetch("./data/cargos.json?t=" + Date.now())
     const periodo = idx>=0 ? movs.slice(idx) : movs;
     const desde = idx>=0 ? movs[idx].fecha : (movs[0]?.fecha || "");
 
-    const ent = periodo.filter(m=>m.direccion==="entrada").reduce((s,m)=>s+m.monto,0);
-    const sal = periodo.filter(m=>m.direccion==="salida").reduce((s,m)=>s+m.monto,0);
+    const ent = periodo.filter(m=>m.direccion=="entrada").reduce((s,m)=>s+m.monto,0);
+    const sal = periodo.filter(m=>m.direccion=="salida").reduce((s,m)=>s+m.monto,0);
     const bal = ent - sal;
 
     document.getElementById("entradas").textContent = fmt(ent);
@@ -140,10 +140,10 @@ fetch("./data/cargos.json?t=" + Date.now())
     const dias = Object.keys(g).sort().reverse();
     cont.innerHTML = dias.map(f => {
       const items = g[f].slice().reverse();
-      const net = items.reduce((s,m)=> s + (m.direccion==="entrada"?m.monto:-m.monto), 0);
+      const net = items.reduce((s,m)=> s + (m.direccion=="entrada"?m.monto:-m.monto), 0);
       const rows = items.map(m => {
-        const io = m.direccion==="entrada" ? "in":"out";
-        const sign = m.direccion==="entrada" ? "+":"−";
+        const io = m.direccion=="entrada" ? "in":"out";
+        const sign = m.direccion=="entrada" ? "+":"−";
         return `<div class="row">
           <div class="ico ${io}">${ICON[m.tipo]||ICON.otro}</div>
           <div class="meta">
