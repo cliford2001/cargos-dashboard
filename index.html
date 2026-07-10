@@ -12,8 +12,7 @@
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased; font-weight:500; letter-spacing:0.01em; text-rendering:optimizeLegibility; font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    font-size:16px; font-variation-settings: 'wght' 500;
+    background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased; font-weight:500; letter-spacing:0.01em; text-rendering:optimizeLegibility; font-size:16px; font-variation-settings: 'wght' 500;
     transition: background 0.3s, color 0.3s;
   }
   .wrap{max-width:760px;margin:0 auto;padding:24px 16px 60px}
@@ -63,6 +62,26 @@
     50%{transform:rotate(180deg) scale(1.2)}
     100%{transform:rotate(360deg) scale(1)}
   }
+  /* Estilos para la tipografía premium */
+  body { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; }
+  .brand { font-weight: 700; letter-spacing: -0.04em; line-height: 1.2; }
+  .brand span { font-weight: 800; letter-spacing: -0.05em; transform: scaleX(1.06); }
+  .hero .lbl { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; font-variation-settings: 'wght' 500; }
+  .hero .big { font-size: 3.4rem; font-weight: 700; letter-spacing: -0.05em; line-height: 1.05; font-variation-settings: 'wght' 700; }
+  .io .k { font-size: 0.75rem; letter-spacing: 0.05em; font-variation-settings: 'wght' 500; }
+  .io .v { font-size: 1.7rem; font-weight: 700; line-height: 1.1; font-variation-settings: 'wght' 600; }
+  .dayhead { font-size: 0.82rem; letter-spacing: 0.03em; font-variation-settings: 'wght' 500; }
+  .row .dest { font-weight: 600; font-variation-settings: 'wght' 600; }
+  .row .sub { font-size: 0.74rem; letter-spacing: 0.02em; font-variation-settings: 'wght' 400; }
+  .amt { font-weight: 700; font-variation-settings: 'wght' 700; }
+  /* Aumentar espaciado y mejorar contraste en el texto */
+  .wrap { padding: 32px 20px 60px; }
+  .hero { padding: 28px; margin-bottom: 24px; }
+  .io .box { padding: 20px; }
+  .row { padding: 16px 6px; }
+  .dayhead { padding: 0 6px 8px; }
+  /* Transiciones suaves */
+  .row, .box, .hero { transition: all 0.2s ease; }
 </style>
 <div class="wrap">
   <header>
@@ -148,7 +167,7 @@ fetch("./data/cargos.json?t=" + Date.now())
         return `<div class="row">
           <div class="ico ${io}">${ICON[m.tipo]||ICON.otro}</div>
           <div class="meta">
-            <div class="dest">${m.destino||"-"}${m.es_sueldo?'<span class="badge">sueldo</span>':''}</div>
+            <div class="dest">${m.destino||""}${m.es_sueldo?'<span class="badge">sueldo</span>':''}</div>
             <div class="sub">${m.hora||""} · ${m.tipo||""}</div>
           </div>
           <div class="amt ${io}">${sign} ${fmt(m.monto).replace("$","$")}</div>
