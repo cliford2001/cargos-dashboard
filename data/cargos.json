@@ -2,7 +2,8 @@
   "titulo": "Mis Finanzas",
   "moneda": "CLP",
   "sueldo_ref": 1200000,
-  "actualizado": "2026-07-09T22:01:43.250324-04:00",
+  "usd_clp": 950,
+  "actualizado": "2026-07-10T00:02:19.927077-04:00",
   "movimientos": [
     {
       "uid": "sueldo-2026-06",
@@ -12,107 +13,146 @@
       "destino": "Sueldo",
       "monto": 1200000,
       "direccion": "entrada",
-      "es_sueldo": true
+      "es_sueldo": true,
+      "fuente": "sueldo"
     },
     {
-      "uid": "1951",
-      "fecha": "2026-06-26",
-      "hora": "21:13",
+      "direccion": "salida",
       "tipo": "transferencia",
       "destino": "NAUTA",
       "monto": 200000,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1951",
+      "fecha": "2026-06-26",
+      "hora": "21:13"
     },
     {
-      "uid": "1952",
-      "fecha": "2026-06-27",
-      "hora": "01:01",
+      "direccion": "salida",
       "tipo": "abono",
       "destino": "Tarjeta de Crédito WORLDMEMBER VISA **** **** **** 7026",
       "monto": 105842,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1952",
+      "fecha": "2026-06-27",
+      "hora": "01:01"
     },
     {
-      "uid": "1955",
+      "direccion": "salida",
+      "tipo": "compra",
+      "destino": "BTC (Kraken)",
+      "monto": 285000,
+      "moneda_orig": "USD",
+      "monto_orig": 300.0,
+      "es_sueldo": false,
+      "fuente": "kraken",
+      "uid": "1950",
       "fecha": "2026-06-27",
-      "hora": "11:43",
+      "hora": "01:11"
+    },
+    {
+      "direccion": "salida",
       "tipo": "abono",
       "destino": "Tarjeta de Crédito WORLDMEMBER VISA **** **** **** 7026",
       "monto": 47889,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1955",
+      "fecha": "2026-06-27",
+      "hora": "11:43"
     },
     {
-      "uid": "1958",
-      "fecha": "2026-06-27",
-      "hora": "15:52",
+      "direccion": "salida",
       "tipo": "transferencia",
       "destino": "Matias Rodrigo Vergara Arroyo",
       "monto": 10000,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1958",
+      "fecha": "2026-06-27",
+      "hora": "15:52"
     },
     {
-      "uid": "1964",
-      "fecha": "2026-07-01",
-      "hora": "13:26",
+      "direccion": "salida",
+      "tipo": "inversion",
+      "destino": "DVA Silicon Fund",
+      "monto": 200000,
+      "moneda_orig": "CLP",
+      "monto_orig": 200000.0,
+      "folio": "200570",
+      "is_solicitud": true,
+      "es_sueldo": false,
+      "fuente": "nauta",
+      "uid": "1963",
+      "fecha": "2026-06-30",
+      "hora": "22:22"
+    },
+    {
+      "direccion": "salida",
       "tipo": "transferencia",
       "destino": "Emanuel",
       "monto": 15000,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1964",
+      "fecha": "2026-07-01",
+      "hora": "13:26"
     },
     {
-      "uid": "1968",
-      "fecha": "2026-07-01",
-      "hora": "19:09",
+      "direccion": "salida",
       "tipo": "transferencia",
       "destino": "Khipu CLBS F",
       "monto": 40855,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1968",
+      "fecha": "2026-07-01",
+      "hora": "19:09"
     },
     {
-      "uid": "1969",
-      "fecha": "2026-07-02",
-      "hora": "14:24",
+      "direccion": "salida",
       "tipo": "transferencia",
       "destino": "Patriciio",
       "monto": 5000,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1969",
+      "fecha": "2026-07-02",
+      "hora": "14:24"
     },
     {
-      "uid": "1974",
-      "fecha": "2026-07-05",
-      "hora": "11:00",
+      "direccion": "salida",
       "tipo": "transferencia",
       "destino": "Joserut",
       "monto": 195000,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1974",
+      "fecha": "2026-07-05",
+      "hora": "11:00"
     },
     {
-      "uid": "1977",
-      "fecha": "2026-07-07",
-      "hora": "18:12",
+      "direccion": "salida",
       "tipo": "transferencia",
       "destino": "Matias Rodrigo Vergara Arroyo",
       "monto": 29000,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1977",
+      "fecha": "2026-07-07",
+      "hora": "18:12"
     },
     {
-      "uid": "1984",
-      "fecha": "2026-07-09",
-      "hora": "14:56",
+      "direccion": "salida",
       "tipo": "transferencia",
       "destino": "Piercing",
       "monto": 3000,
-      "direccion": "salida",
-      "es_sueldo": false
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1984",
+      "fecha": "2026-07-09",
+      "hora": "14:56"
     }
   ]
 }
