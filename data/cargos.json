@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "sueldo_ref": 1200000,
   "usd_clp": 950,
-  "actualizado": "2026-07-10T00:53:09.682772-04:00",
+  "actualizado": "2026-07-10T01:13:38.611539-04:00",
   "movimientos": [
     {
       "uid": "sueldo-2026-06",
@@ -153,6 +153,17 @@
       "uid": "1989",
       "fecha": "2026-07-10",
       "hora": "00:52"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Kupo",
+      "monto": 15250,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1990",
+      "fecha": "2026-07-10",
+      "hora": "01:07"
     }
   ]
 }
