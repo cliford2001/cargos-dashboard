@@ -2,8 +2,18 @@
   "titulo": "Mis Finanzas",
   "moneda": "CLP",
   "sueldo_ref": 1200000,
-  "actualizado": "2026-07-09T21:59:42.543482-04:00",
+  "actualizado": "2026-07-09T22:01:43.250324-04:00",
   "movimientos": [
+    {
+      "uid": "sueldo-2026-06",
+      "fecha": "2026-06-23",
+      "hora": "00:00",
+      "tipo": "sueldo",
+      "destino": "Sueldo",
+      "monto": 1200000,
+      "direccion": "entrada",
+      "es_sueldo": true
+    },
     {
       "uid": "1951",
       "fecha": "2026-06-26",
