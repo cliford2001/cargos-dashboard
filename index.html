@@ -65,8 +65,8 @@
   }
   /* Estilos para la tipografía premium */
   body { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; }
-  .brand { font-weight: 700; letter-spacing: -0.04em; line-height: 1.2; }
-  .brand span { font-weight: 800; letter-spacing: -0.05em; transform: scaleX(1.06); }
+  .brand { font-weight: 700; letter-spacing: -0.04em; line-height: 1.2; font-variation-settings: 'wght' 600; }
+  .brand span { font-weight: 800; letter-spacing: -0.05em; transform: scaleX(1.06); font-variation-settings: 'wght' 800; }
   .hero .lbl { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; font-variation-settings: 'wght' 500; }
   .hero .big { font-size: 3.6rem; font-weight: 700; letter-spacing: -0.06em; line-height: 1.03; font-variation-settings: 'wght' 700; }
   .io .k { font-size: 0.75rem; letter-spacing: 0.05em; font-variation-settings: 'wght' 500; }
@@ -75,6 +75,30 @@
   .row .dest { font-weight: 600; font-variation-settings: 'wght' 600; }
   .row .sub { font-size: 0.74rem; letter-spacing: 0.02em; font-variation-settings: 'wght' 400; }
   .amt { font-weight: 700; font-variation-settings: 'wght' 700; }
+
+  /* Aumentar contraste y jerarquía visual */
+  .brand, .hero .lbl, .io .k, .dayhead, .row .dest, .row .sub {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-variation-settings: 'wght' 600;
+  }
+  .hero .big { font-weight: 700; }
+  .io .v { font-weight: 700; }
+  
+  /* Espaciado más generoso y transiciones más suaves */
+  .wrap { padding: 40px 24px 60px; }
+  .hero { padding: 32px; margin-bottom: 28px; }
+  .io .box { padding: 24px; }
+  .row { padding: 20px 6px; }
+  .dayhead { padding: 0 8px 10px; }
+  
+  /* Transiciones suaves y efectos de profundidad */
+  .hero, .io .box, .row {
+    transition: all 0.4s cubic-bezier(0.32, 0.7, 0.32, 1);
+  }
+  .hero:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
+  .io .box:hover { transform: translateY(-4px); background: color-mix(in srgb,var(--card) 15%,transparent); }
+  .row:hover { background: color-mix(in srgb,var(--card) 15%,transparent); }
   /* Aumentar espaciado y mejorar contraste en el texto */
   .wrap { padding: 32px 20px 60px; }
   .hero { padding: 28px; margin-bottom: 24px; }
