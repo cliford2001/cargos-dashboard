@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "sueldo_ref": 1200000,
   "usd_clp": 950,
-  "actualizado": "2026-07-10T00:04:57.810134-04:00",
+  "actualizado": "2026-07-10T00:06:32.022719-04:00",
   "movimientos": [
     {
       "uid": "sueldo-2026-06",
@@ -15,17 +15,6 @@
       "direccion": "entrada",
       "es_sueldo": true,
       "fuente": "sueldo"
-    },
-    {
-      "direccion": "salida",
-      "tipo": "transferencia",
-      "destino": "NAUTA",
-      "monto": 200000,
-      "es_sueldo": false,
-      "fuente": "santander",
-      "uid": "1951",
-      "fecha": "2026-06-26",
-      "hora": "21:13"
     },
     {
       "direccion": "salida",
