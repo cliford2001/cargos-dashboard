@@ -13,12 +13,19 @@ finanzas personales (estilo apps como Fintual, Mercado Pago, Revolut).
   "moneda": "CLP",
   "sueldo_ref": 1200000,
   "actualizado": "ISO...",
+  "usd_clp": 950,
   "movimientos": [
     { "uid", "fecha", "hora", "tipo", "destino", "monto",
-      "direccion": "entrada"|"salida", "es_sueldo": true|false }
+      "direccion": "entrada"|"salida", "es_sueldo": true|false,
+      "fuente": "santander"|"kraken"|"nauta"|"sueldo",
+      "moneda_orig": "USD", "monto_orig": 300 }   // opcionales: compras USD (Kraken) convertidas a CLP
   ]
 }
 ```
+Fuentes: Santander (transferencias/pagos), Kraken (compra BTC, USD→CLP), Nauta/Compass DVA
+(aporte a fondo = inversion), y sueldo sintetico dia 23. `tipo` puede ser
+transferencia|compra|pago|giro|sueldo|abono|inversion|otro. Si `moneda_orig=="USD"`,
+`monto` ya esta convertido a CLP y `monto_orig` es el valor original en USD (puedes mostrarlo).
 - **entrada** = dinero que ENTRA (sueldo, abono, transferencia recibida). Se muestra en verde con signo +.
 - **salida** = GASTO (compra, giro, pago, transferencia enviada). Se muestra en rojo/neutro con signo −.
 - **es_sueldo** = una entrada ≈ $1.200.000 que marca el inicio de un **periodo salarial** (mes salarial).
