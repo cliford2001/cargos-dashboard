@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "sueldo_ref": 1200000,
   "usd_clp": 950,
-  "actualizado": "2026-07-10T01:13:38.611539-04:00",
+  "actualizado": "2026-07-13T14:33:53.575614-04:00",
   "movimientos": [
     {
       "uid": "sueldo-2026-06",
@@ -164,6 +164,17 @@
       "uid": "1990",
       "fecha": "2026-07-10",
       "hora": "01:07"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Catalina Lissette Mendez",
+      "monto": 25000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "1997",
+      "fecha": "2026-07-12",
+      "hora": "18:30"
     }
   ]
 }

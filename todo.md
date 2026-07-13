@@ -1,0 +1,8 @@
+- [x] Leer index.html y data/cargos.json
+- [ ] Elegir 1-2 mejoras de diseño concretas (no reescribir todo)
+- [ ] Aplicar mejoras: tipografía, paleta, micro-interacciones, SVG
+- [ ] Verificar que fetch a ./data/cargos.json sigue intacto
+- [ ] Verificar que Entradas/Salidas/Balance/periodo siguen visibles y correctos
+- [ ] Agregar línea a CHANGELOG.md con fecha y descripción
+- [ ] Ejecutar git add -A && git commit -m "diseño: ..." && git pull --rebase && git push
+- [ ] Si falla git push, hacer git pull --rebase y reintentar
