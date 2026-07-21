@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "sueldo_ref": 1200000,
   "usd_clp": 950,
-  "actualizado": "2026-07-13T14:33:53.575614-04:00",
+  "actualizado": "2026-07-21T17:55:00.576531-04:00",
   "movimientos": [
     {
       "uid": "sueldo-2026-06",
@@ -175,6 +175,17 @@
       "uid": "1997",
       "fecha": "2026-07-12",
       "hora": "18:30"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Matias Rodrigo Vergara Arroyo",
+      "monto": 30000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2004",
+      "fecha": "2026-07-14",
+      "hora": "16:54"
     }
   ]
 }
