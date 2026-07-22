@@ -13,11 +13,11 @@
   *{box-sizing:border-box}
   body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     background:var(--bg);color:var(--txt);line-height:1.7;-webkit-font-smoothing:antialiased;letter-spacing:-0.01em;
-    font-weight:400;letter-spacing:-0.01em;}
-  
-  /* Improved typographic hierarchy and spacing */
-  h1{font-size:1.8rem; line-height:1.3; margin-bottom:12px; letter-spacing:-0.015em;}
-  h2{font-size:1.3rem; line-height:1.4; margin-bottom:10px; letter-spacing:-0.015em;}
+    font-weight:500;letter-spacing:-0.01em; font-size:1rem;
+  }
+  /* Enhanced typography and visual hierarchy */
+  h1{font-size:2.2rem; line-height:1.3; margin-bottom:16px; letter-spacing:-0.02em; font-weight:800;}
+  h2{font-size:1.5rem; line-height:1.4; margin-bottom:12px; letter-spacing:-0.018em; font-weight:700;}
   h3{font-size:1.15rem; line-height:1.4; margin-bottom:8px; letter-spacing:-0.015em;}
   h4{font-size:1rem; line-height:1.4; margin-bottom:6px; letter-spacing:-0.015em;}
   
@@ -37,49 +37,20 @@
     .row .dest{font-size:0.95rem;}
     .row .sub{font-size:0.65rem;}
     .amt{font-size:1rem;}
-  }}
-
-h1,h2,h3,h4,h5,h6{font-weight:600;letter-spacing:-0.015em;}
-
-h1{font-size:1.8rem; line-height:1.3; margin-bottom:12px;}
-
-h2{font-size:1.3rem; line-height:1.4; margin-bottom:10px;}
-
-h3{font-size:1.15rem; line-height:1.4; margin-bottom:8px;}
-
-h4{font-size:1rem; line-height:1.4; margin-bottom:6px;}
-
-.hero .big{font-size:2.8rem; font-weight:700; letter-spacing:-0.04em; line-height:1.2;}
-
-.io .v{font-size:1.7rem; font-weight:700; line-height:1.3;}
-
-.row .dest{font-size:1rem; font-weight:500;}
-
-.row .sub{font-size:0.7rem; font-weight:400;}
-
-.amt{font-size:1.1rem; font-weight:600; line-height:1.2;}
-
-/* Add responsive line-height for mobile */
-@media (max-width: 480px) {
-  body{font-size:0.9rem; line-height:1.6;}
-  h1{font-size:1.6rem; line-height:1.3;}
-  h2{font-size:1.2rem; line-height:1.4;}
-  .hero .big{font-size:2.4rem;}
-  .io .v{font-size:1.5rem;}
-  .row .dest{font-size:0.95rem;}
-  .row .sub{font-size:0.65rem;}
-  .amt{font-size:1rem;}
-}
-  .wrap{max-width:760px;margin:0 auto;padding:24px 16px 60px}
-  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+  }
+  
+  /* Improved visual hierarchy with spacing and contrast */
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:8px}
   .brand{font-weight:700;font-size:1.35rem;letter-spacing:-0.015em}
   .brand span{color:var(--accent);font-weight:800}
   .period{font-size:.85rem;color:var(--mut);font-weight:500}
+  
   .hero{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;margin-bottom:24px;transition:box-shadow 0.3s ease, transform 0.3s ease;}
   .hero:hover{box-shadow:0 8px 24px rgba(0,0,0,0.2);transform:translateY(-2px);}
   .hero .lbl{font-size:.8rem;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;opacity:0.9;}
   .hero .big{font-size:2.8rem;font-weight:800;letter-spacing:-0.04em;margin-top:4px;transition:color 0.3s ease;}
   .hero .big.neg{color:var(--out)} .hero .big.pos{color:var(--in)}
+  
   .io{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;transition:opacity 0.3s ease;}
   .io .box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;transition:box-shadow 0.3s ease, background 0.3s ease;}
   .io .box:hover{box-shadow:0 6px 16px rgba(0,0,0,0.15);background:color-mix(in srgb,var(--card) 98%,transparent);}
@@ -90,25 +61,28 @@ h4{font-size:1rem; line-height:1.4; margin-bottom:6px;}
   .io .v{font-size:1.7rem;font-weight:700;margin-top:6px;transition:color 0.3s ease;}
   .io .in .v{color:var(--in)} .io .out .v{color:var(--out)}
   
-  /* Micro-interactions for row items */
-  .row{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line);transition:background 0.3s ease, transform 0.3s ease;}
-  .row:hover{background:color-mix(in srgb,var(--card) 98%,transparent);transform:translateX(4px);}
+  /* Enhanced micro-interactions and transitions */
+  .row{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line);transition:background 0.3s ease, transform 0.3s ease, border-radius 0.3s ease;}
+  .row:hover{background:color-mix(in srgb,var(--card) 98%,transparent);transform:translateX(4px);border-radius:16px;}
   .row:last-child{border-bottom:none}
   
-  /* Empty state styling */
-  .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 0;color:var(--mut);text-align:center;transition:opacity 0.3s ease;}
+  /* Smooth fade-in for empty state */
+  .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 0;color:var(--mut);text-align:center;transition:opacity 0.3s ease, transform 0.3s ease;}
   .empty svg{width:48px;height:48px;margin-bottom:16px;opacity:0.6;}
   .empty h3{font-size:1.1rem;letter-spacing:-0.01em;margin-bottom:8px;}
   .empty p{font-size:0.85rem;opacity:0.8;}
+  
+  /* Day group styling with subtle lift */
   .daygrp{margin-top:28px}
   .dayhead{display:flex;justify-content:space-between;align-items:baseline;
     font-size:.85rem;color:var(--mut);padding:0 4px 8px;border-bottom:1px solid var(--line);margin-bottom:8px}
-  .row{display:flex;align-items:center;gap:12px;padding:12px 6px;border-bottom:1px solid var(--line)}
-  .row:last-child{border-bottom:none}
+  
   .ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
-    font-size:1.05rem;flex:0 0 auto}
+    font-size:1.05rem;flex:0 0 auto;transition:transform 0.3s ease, background 0.3s ease;}
   .ico.in{background:color-mix(in srgb,var(--in) 18%,transparent);color:var(--in)}
   .ico.out{background:color-mix(in srgb,var(--out) 16%,transparent);color:var(--out)}
+  .ico:hover{transform:scale(1.08);}
+  
   .meta{flex:1;min-width:0}
   .dest{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .sub{font-size:.76rem;color:var(--mut)}
@@ -118,7 +92,6 @@ h4{font-size:1rem; line-height:1.4; margin-bottom:6px;}
     background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent);
     padding:2px 7px;border-radius:999px;margin-left:6px}
   footer{margin-top:36px;text-align:center;font-size:.72rem;color:var(--mut)}
-  .empty{text-align:center;color:var(--mut);padding:40px 0}
 </style>
 <div class="wrap">
   <header>
@@ -155,53 +128,18 @@ fetch("./data/cargos.json?t=" + Date.now())
   .then(d => {
     // compat: esquema viejo usaba 'cargos' (todo salida)
     let movs = d.movimientos || (d.cargos||[]).map(c => ({...c, direccion:c.direccion||"salida"}));
-    movs.sort((a,b)=> (a.fecha+ (a.hora||"")).localeCompare(b.fecha+(b.hora||"")));
+    movs.sort((a,b)=> (a.fecha+ (a.hora||""))</style>
+</div>
+<script>
+const fmt = n => (n<0?"-":"") + "$" + Math.abs(n).toLocaleString("es-CL");
+const ICON = {compra:"🛒",transferencia:"↔",pago:"💳",giro:"🏧",sueldo:"💼",abono:"⬇",inversion:"📈",otro:"•"};
 
-    // periodo salarial = desde el ultimo sueldo (es_sueldo) en adelante
-    let idx = -1;
-    for (let i=movs.length-1;i>=0;i--){ if(movs[i].es_sueldo){ idx=i; break; } }
-    const periodo = idx>=0 ? movs.slice(idx) : movs;
-    const desde = idx>=0 ? movs[idx].fecha : (movs[0]?.fecha || "—");
-
-    const ent = periodo.filter(m=>m.direccion==="entrada").reduce((s,m)=>s+m.monto,0);
-    const sal = periodo.filter(m=>m.direccion==="salida").reduce((s,m)=>s+m.monto,0);
-    const bal = ent - sal;
-
-    document.getElementById("entradas").textContent = fmt(ent);
-    document.getElementById("salidas").textContent = fmt(sal);
-    const b = document.getElementById("balance");
-    b.textContent = fmt(bal); b.className = "big " + (bal>=0?"pos":"neg");
-    document.getElementById("period").textContent =
-      idx>=0 ? ("Periodo salarial desde " + desde) : ("Todos los movimientos desde " + desde);
-    document.getElementById("upd").textContent = (d.actualizado||"").slice(0,16).replace("T"," ");
-
-    const cont = document.getElementById("lista");
-    if(!periodo.length){ cont.innerHTML = '<div class="empty">Sin movimientos aún.</div>'; return; }
-
-    // agrupa por dia, mas reciente primero
-    const g = {};
-    periodo.forEach(m => (g[m.fecha]=g[m.fecha]||[]).push(m));
-    const dias = Object.keys(g).sort().reverse();
-    cont.innerHTML = dias.map(f => {
-      const items = g[f].slice().reverse();
-      const net = items.reduce((s,m)=> s + (m.direccion==="entrada"?m.monto:-m.monto), 0);
-      const rows = items.map(m => {
-        const io = m.direccion==="entrada" ? "in":"out";
-        const sign = m.direccion==="entrada" ? "+":"−";
-        return `<div class="row">
-          <div class="ico ${io}">${ICON[m.tipo]||ICON.otro}</div>
-          <div class="meta">
-            <div class="dest">${m.destino||"—"}${m.es_sueldo?'<span class="badge">sueldo</span>':''}</div>
-            <div class="sub">${m.hora||""} · ${m.tipo||""}${m.moneda_orig==="USD"?" · US$"+m.monto_orig:""}${m.fuente&&m.fuente!=="santander"&&m.fuente!=="sueldo"?" · "+m.fuente:""}</div>
-          </div>
-          <div class="amt ${io}">${sign} ${fmt(m.monto).replace("$","$")}</div>
-        </div>`;
-      }).join("");
-      return `<div class="daygrp">
-        <div class="dayhead"><span>${f}</span><span>${fmt(net)}</span></div>
-        ${rows}
-      </div>`;
-    }).join("");
+fetch("./data/cargos.json?t=" + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    // compat: esquema viejo usaba 'cargos' (todo salida)
+    let movs = d.movimientos || (d.cargos||[]).map(c => ({...c, direccion:c.direccion||"salida"}));
+    movs.sort((a,b)=> (a.fecha+ (a.hora||""))
   })
   .catch(e => {
     document.getElementById("lista").innerHTML = '<div class="empty">No se pudieron cargar los datos.</div>';
