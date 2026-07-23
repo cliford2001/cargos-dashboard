@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "sueldo_ref": 1200000,
   "usd_clp": 950,
-  "actualizado": "2026-07-21T17:55:00.576531-04:00",
+  "actualizado": "2026-07-23T00:04:03.115383-04:00",
   "movimientos": [
     {
       "uid": "sueldo-2026-06",
@@ -186,6 +186,17 @@
       "uid": "2004",
       "fecha": "2026-07-14",
       "hora": "16:54"
+    },
+    {
+      "uid": "sueldo-2026-07",
+      "fecha": "2026-07-23",
+      "hora": "00:00",
+      "tipo": "sueldo",
+      "destino": "Sueldo",
+      "monto": 1200000,
+      "direccion": "entrada",
+      "es_sueldo": true,
+      "fuente": "sueldo"
     }
   ]
 }
