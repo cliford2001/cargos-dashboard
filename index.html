@@ -11,8 +11,8 @@
       --in:#1a7f37; --out:#cf222e; --accent:#0969da; }
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased;letter-spacing:-0.01em;
+  body{margin:0;font-family:'Inter', 'SF Pro Text', system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.7;-webkit-font-smoothing:antialiased;letter-spacing:-0.01em;
     font-weight:600;letter-spacing:-0.01em; font-size:1rem;
     --font-smooth: 1.05;
     font-feature-settings: 'kern', 'liga', 'dlig', 'calt';
@@ -172,10 +172,12 @@
   <header>
     <div class="brand">
       <svg viewBox="0 0 120 40" width="100" height="30" style="vertical-align: middle; margin-right: 8px;">
-        <rect width="120" height="40" fill="var(--accent)" />
-        <text x="60" y="25" font-family='Inter',sans-serif font-size="16" font-weight="700" text-anchor="middle" fill="white">MF</text>
+        <use href="#logo" />
       </svg>
-      <span>Mis Finanzas</span>
+      <div>
+        <h1>Mis Finanzas</h1>
+        <p class="tagline">Gestiona tu dinero con inteligencia</p>
+      </div>
     </div>
     <div class="period" id="period">—</div>
   </header>
