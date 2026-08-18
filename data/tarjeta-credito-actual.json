@@ -1,0 +1,125 @@
+{
+  "titulo": "Tarjeta de credito Santander actual",
+  "fuente": "santander-web",
+  "estado": "ok",
+  "actualizado": "2026-08-05T09:52:14.291Z",
+  "url": "https://mibanco.santander.cl/UI.Web.HB/Private_new/frame/#/private/Saldos_TC/main/billed",
+  "mensaje": "",
+  "facturado": {
+    "deuda_total_facturada": 127943,
+    "monto_utilizado_cierre": 127943,
+    "cupo_total_cierre": 0,
+    "cupo_disponible_cierre": 0,
+    "saldo_anterior": 97253,
+    "saldo_capital_cuota": 246124,
+    "deuda_facturada": 127943,
+    "deuda_facturada_titulo": 184003,
+    "deuda_facturada_beneficiario": 0,
+    "deuda_no_facturada": 0,
+    "fecha_factura": "2026-07-23",
+    "facturado_periodo_anterior": 97253,
+    "cupo_utilizado_cierre": 0
+  },
+  "por_facturar": {
+    "total_cargos": 73440,
+    "total_abonos": 201383,
+    "total_neto": -127943,
+    "movimientos": [
+      {
+        "fecha": "2026-08-01",
+        "descripcion": "PAGO",
+        "comercio": "",
+        "rubro": "AVANCE POR CAJA",
+        "ciudad": "",
+        "monto": 201383,
+        "direccion": "entrada",
+        "es_saldo_inicial": false,
+        "source_order": 0
+      },
+      {
+        "fecha": "2026-07-28",
+        "descripcion": "COMPRA NORMAL",
+        "comercio": "UCATOLICA SEDE CENTRAL",
+        "rubro": "SUPERMERCADO",
+        "ciudad": "SANTIAGO",
+        "monto": 7290,
+        "direccion": "salida",
+        "es_saldo_inicial": false,
+        "source_order": 1
+      },
+      {
+        "fecha": "2026-07-25",
+        "descripcion": "COMPRA NORMAL",
+        "comercio": "ANAMAYA",
+        "rubro": "MERCANCIA GENERAL MISCELANEA",
+        "ciudad": "11001SANTIAGO",
+        "monto": 10150,
+        "direccion": "salida",
+        "es_saldo_inicial": false,
+        "source_order": 2
+      },
+      {
+        "fecha": "2026-07-25",
+        "descripcion": "COMPRA INT. EN MONEDA NACIONAL",
+        "comercio": "ANTHROPIC* CLAUDE SUB",
+        "rubro": "TIENDAS DE SOFTWARE DE COMPUTA",
+        "ciudad": "ANTHROPIC.COM",
+        "monto": 23100,
+        "direccion": "salida",
+        "es_saldo_inicial": false,
+        "source_order": 3
+      },
+      {
+        "fecha": "2026-07-25",
+        "descripcion": "COMPRA NORMAL",
+        "comercio": "H Y M",
+        "rubro": "RESTAURANTES DE COMIDA RAPIDA",
+        "ciudad": "LAS CONDES",
+        "monto": 11500,
+        "direccion": "salida",
+        "es_saldo_inicial": false,
+        "source_order": 4
+      },
+      {
+        "fecha": "2026-07-25",
+        "descripcion": "COMPRA NORMAL",
+        "comercio": "MERCADOPAGO*SIDDHICOFFEE",
+        "rubro": "SERV. DE RECREACION",
+        "ciudad": "LAS CONDES",
+        "monto": 12500,
+        "direccion": "salida",
+        "es_saldo_inicial": false,
+        "source_order": 5
+      },
+      {
+        "fecha": "2026-07-25",
+        "descripcion": "COMPRA NORMAL",
+        "comercio": "MERCADOPAGO*LAVERITA",
+        "rubro": "RESTAURANTES DE COMIDA RAPIDA",
+        "ciudad": "LAS CONDES",
+        "monto": 8900,
+        "direccion": "salida",
+        "es_saldo_inicial": false,
+        "source_order": 6
+      },
+      {
+        "fecha": "2026-07-23",
+        "descripcion": "SALDO INICIAL",
+        "comercio": "",
+        "rubro": "",
+        "ciudad": "",
+        "monto": 127943,
+        "direccion": "salida",
+        "es_saldo_inicial": true,
+        "source_order": 7
+      }
+    ]
+  },
+  "referencia": [],
+  "ultimo_ok": "2026-08-05T09:52:14.291Z",
+  "cupo_total": 500000,
+  "cupo_utilizado": 246124,
+  "cupo_disponible": 253876,
+  "producto": "WORLDMEMBER VISA",
+  "moneda": "CLP"
+}

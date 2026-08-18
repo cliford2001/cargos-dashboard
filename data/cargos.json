@@ -2,20 +2,89 @@
   "titulo": "Mis Finanzas",
   "moneda": "CLP",
   "saldo_inicial": 391,
-  "inicio_periodo": "2026-07-27T17:08:50.931Z",
-  "actualizado": "2026-07-27T13:15:57.052587-04:00",
+  "inicio_periodo": "2026-07-27T17:31:57.506610Z",
+  "actualizado": "2026-08-18T10:58:22.268711-04:00",
   "movimientos": [
     {
-      "uid": "sueldo-2026-07",
-      "fecha": "2026-07-23",
-      "hora": "00:00",
-      "tipo": "sueldo",
-      "destino": "Sueldo",
-      "monto": 1200000,
-      "direccion": "entrada",
-      "es_sueldo": true,
-      "fuente": "sueldo"
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Vero",
+      "monto": 200000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2057",
+      "fecha": "2026-08-01",
+      "hora": "12:07"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "abono",
+      "destino": "Tarjeta de Crédito WORLDMEMBER VISA **** **** **** 7026",
+      "monto": 201383,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2058",
+      "fecha": "2026-08-01",
+      "hora": "12:11"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Jose",
+      "monto": 183000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2059",
+      "fecha": "2026-08-01",
+      "hora": "12:14"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Matias Rodrigo Vergara Arroyo",
+      "monto": 7000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2071",
+      "fecha": "2026-08-03",
+      "hora": "21:55"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "inversion",
+      "destino": "DVA Silicon Fund",
+      "monto": 500000,
+      "moneda_orig": "CLP",
+      "monto_orig": 500000.0,
+      "folio": "210212",
+      "is_solicitud": true,
+      "es_sueldo": false,
+      "fuente": "nauta",
+      "uid": "2066",
+      "fecha": "2026-08-03",
+      "hora": "22:25"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Matias Rodrigo Vergara Arroyo",
+      "monto": 3000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2078",
+      "fecha": "2026-08-05",
+      "hora": "13:18"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Monica",
+      "monto": 45000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2100",
+      "fecha": "2026-08-10",
+      "hora": "16:00"
     }
-  ],
-  "sueldo_ref": 1200000
+  ]
 }

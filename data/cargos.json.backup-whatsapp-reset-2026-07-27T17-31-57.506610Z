@@ -1,0 +1,21 @@
+{
+  "titulo": "Mis Finanzas",
+  "moneda": "CLP",
+  "saldo_inicial": 391,
+  "inicio_periodo": "2026-07-27T17:08:50.931Z",
+  "actualizado": "2026-07-27T13:15:57.052587-04:00",
+  "movimientos": [
+    {
+      "uid": "sueldo-2026-07",
+      "fecha": "2026-07-23",
+      "hora": "00:00",
+      "tipo": "sueldo",
+      "destino": "Sueldo",
+      "monto": 1200000,
+      "direccion": "entrada",
+      "es_sueldo": true,
+      "fuente": "sueldo"
+    }
+  ],
+  "sueldo_ref": 1200000
+}

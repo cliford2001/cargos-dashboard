@@ -1,0 +1,246 @@
+{
+  "estado_cuenta_fecha": "2026-07-23",
+  "periodo_desde": "2026-06-23",
+  "periodo_hasta": "2026-07-23",
+  "pagar_hasta": "2026-08-10",
+  "monto_total_facturado": 127943,
+  "monto_minimo": 15300,
+  "cupo_total": 500000,
+  "cupo_utilizado": 374067,
+  "cupo_disponible": 125933,
+  "movimientos": [
+    {
+      "uid": "tcr-9f3565854cd2a38ff3",
+      "fecha": "2025-08-18",
+      "lugar": "Movimiento tarjeta",
+      "descripcion": "MERPAGO*LASTRESMARIAS",
+      "direccion": "salida",
+      "tipo": "compra_cuotas",
+      "monto": 13337,
+      "monto_firmado": 13337,
+      "seccion": "periodo_actual",
+      "source_order": 0
+    },
+    {
+      "uid": "tcr-5ba41fcea493c5075d",
+      "fecha": "2026-05-21",
+      "lugar": "Movimiento tarjeta",
+      "descripcion": "HIP LIDER TALCA LA FLOR",
+      "direccion": "salida",
+      "tipo": "compra_cuotas",
+      "monto": 15704,
+      "monto_firmado": 15704,
+      "seccion": "periodo_actual",
+      "source_order": 1
+    },
+    {
+      "uid": "tcr-4671baa8ec97d284f1",
+      "fecha": "2026-06-17",
+      "lugar": "Movimiento tarjeta",
+      "descripcion": "KSK*HITES",
+      "direccion": "salida",
+      "tipo": "compra_cuotas",
+      "monto": 43176,
+      "monto_firmado": 43176,
+      "seccion": "periodo_actual",
+      "source_order": 2
+    },
+    {
+      "uid": "tcr-9e3b7c6dc4de41725a",
+      "fecha": "2026-06-23",
+      "lugar": "SANTIAGO",
+      "descripcion": "DL*RIOTGAMES",
+      "direccion": "salida",
+      "tipo": "compra",
+      "monto": 27000,
+      "monto_firmado": 27000,
+      "seccion": "periodo_actual",
+      "source_order": 3
+    },
+    {
+      "uid": "tcr-81957174436d164e71",
+      "fecha": "2026-08-10",
+      "lugar": "Movimiento tarjeta",
+      "descripcion": "/2026 Banco",
+      "direccion": "salida",
+      "tipo": "compra",
+      "monto": 127943,
+      "monto_firmado": 127943,
+      "seccion": "periodo_actual",
+      "source_order": 4
+    },
+    {
+      "uid": "tcr-9e2b81190e9fae79d9",
+      "fecha": "2026-06-24",
+      "lugar": "LAS CONDES",
+      "descripcion": "MERPAGO*PAYQUBIT",
+      "direccion": "salida",
+      "tipo": "compra",
+      "monto": 7000,
+      "monto_firmado": 7000,
+      "seccion": "periodo_actual",
+      "source_order": 5
+    },
+    {
+      "uid": "tcr-0ba8982c09451a60ea",
+      "fecha": "2026-06-25",
+      "lugar": "ANTHROPIC.CO",
+      "descripcion": "ANTHROPIC* CLAUDE SUB",
+      "direccion": "salida",
+      "tipo": "suscripcion",
+      "monto": 22478,
+      "monto_firmado": 22478,
+      "seccion": "periodo_actual",
+      "source_order": 6
+    },
+    {
+      "uid": "tcr-37e2ad201eec1b11be",
+      "fecha": "2026-06-27",
+      "lugar": "Movimiento tarjeta",
+      "descripcion": "MONTO CANCELADO",
+      "direccion": "entrada",
+      "tipo": "pago",
+      "monto": 47889,
+      "monto_firmado": -47889,
+      "seccion": "periodo_actual",
+      "source_order": 7
+    },
+    {
+      "uid": "tcr-417b0000fdcfaa1652",
+      "fecha": "2026-06-27",
+      "lugar": "Movimiento tarjeta",
+      "descripcion": "MONTO CANCELADO",
+      "direccion": "entrada",
+      "tipo": "pago",
+      "monto": 105842,
+      "monto_firmado": -105842,
+      "seccion": "periodo_actual",
+      "source_order": 8
+    },
+    {
+      "uid": "tcr-8d52d330ccd9b2001b",
+      "fecha": "2026-07-05",
+      "lugar": "LAS CONDES",
+      "descripcion": "NINTENDO OF AMERICA",
+      "direccion": "salida",
+      "tipo": "suscripcion",
+      "monto": 35990,
+      "monto_firmado": 35990,
+      "seccion": "periodo_actual",
+      "source_order": 9
+    },
+    {
+      "uid": "tcr-161d28b1a6657d523c",
+      "fecha": "2026-07-10",
+      "lugar": "Movimiento tarjeta",
+      "descripcion": "APPLE.COM CL APPLE",
+      "direccion": "salida",
+      "tipo": "compra_cuotas",
+      "monto": 15330,
+      "monto_firmado": 15330,
+      "seccion": "periodo_actual",
+      "source_order": 10
+    },
+    {
+      "uid": "tcr-5ea9ce0b721c152952",
+      "fecha": "2026-07-18",
+      "lugar": "Santiago",
+      "descripcion": "Smart Fit Chile",
+      "direccion": "salida",
+      "tipo": "suscripcion",
+      "monto": 1000,
+      "monto_firmado": 1000,
+      "seccion": "periodo_actual",
+      "source_order": 11
+    },
+    {
+      "uid": "tcr-7dc069a1d4d0e12600",
+      "fecha": "2026-07-20",
+      "lugar": "SANTIAGO",
+      "descripcion": "SUCURSAL PUC",
+      "direccion": "salida",
+      "tipo": "compra",
+      "monto": 2988,
+      "monto_firmado": 2988,
+      "seccion": "periodo_actual",
+      "source_order": 12
+    },
+    {
+      "uid": "tcr-2f438ed4292e87f34a",
+      "fecha": "2026-07-11",
+      "lugar": "TALCA",
+      "descripcion": "IMPTO. DECRETO LEY 3475 HIP LIDER TALCA 0,066 %",
+      "direccion": "salida",
+      "tipo": "impuesto",
+      "monto": 247,
+      "monto_firmado": 247,
+      "seccion": "cargos_comisiones",
+      "source_order": 13
+    },
+    {
+      "uid": "tcr-526235aaa0fdf7c809",
+      "fecha": "2026-07-11",
+      "lugar": "TALCA",
+      "descripcion": "IMPTO. DECRETO LEY 3475 ALIMENTOS LORRAI 0,066 %",
+      "direccion": "salida",
+      "tipo": "impuesto",
+      "monto": 171,
+      "monto_firmado": 171,
+      "seccion": "cargos_comisiones",
+      "source_order": 14
+    },
+    {
+      "uid": "tcr-4a65005823797050d4",
+      "fecha": "2026-07-11",
+      "lugar": "Movimiento tarjeta",
+      "descripcion": "HIP LIDER TALCA LA FLOR",
+      "direccion": "salida",
+      "tipo": "compra_cuotas",
+      "monto": 34469,
+      "monto_firmado": 34469,
+      "seccion": "compras_cuotas_periodo",
+      "source_order": 15
+    },
+    {
+      "uid": "tcr-a0c835707e479f04fd",
+      "fecha": "2026-07-11",
+      "lugar": "Movimiento tarjeta",
+      "descripcion": "ALIMENTOS LORRAINE E",
+      "direccion": "salida",
+      "tipo": "compra_cuotas",
+      "monto": 23872,
+      "monto_firmado": 23872,
+      "seccion": "compras_cuotas_periodo",
+      "source_order": 16
+    }
+  ],
+  "por_tipo": [
+    {
+      "tipo": "compra",
+      "monto": 164931,
+      "cantidad": 4
+    },
+    {
+      "tipo": "compra_cuotas",
+      "monto": 145888,
+      "cantidad": 6
+    },
+    {
+      "tipo": "suscripcion",
+      "monto": 59468,
+      "cantidad": 3
+    },
+    {
+      "tipo": "impuesto",
+      "monto": 418,
+      "cantidad": 2
+    }
+  ],
+  "titulo": "Tarjeta de credito Santander",
+  "fuente": "correo-santander-pdf",
+  "email_uid": "2041",
+  "email_fecha": "2026-07-27T17:36:43-04:00",
+  "email_asunto": "Estado de Cuenta Tarjeta de Crédito",
+  "archivo": "80_[num]_[num]_[num].pdf",
+  "actualizado": "2026-08-18T10:27:40.243059-04:00"
+}

@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mis Finanzas</title>
+  <style>
+    :root {
+      color-scheme: dark light;
+      --bg: #0f1216;
+      --panel: #171c22;
+      --panel-2: #1d232b;
+      --line: #2a333d;
+      --text: #edf2f7;
+      --muted: #9aa6b2;
+      --in: #2da44e;
+      --out: #d1242f;
+      --accent: #2f81f7;
+      --warn: #d29922;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f4f6f8;
+        --panel: #ffffff;
+        --panel-2: #eef2f6;
+        --line: #d8dee4;
+        --text: #1f2933;
+        --muted: #66727f;
+        --in: #1a7f37;
+        --out: #cf222e;
+        --accent: #0969da;
+        --warn: #9a6700;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 24px 0 32px;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 1.8rem; font-weight: 760; }
+    h2 { font-size: 1rem; font-weight: 720; }
+    h3 { font-size: .88rem; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+
+    .sub { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+    .status { color: var(--muted); font-size: .86rem; text-align: right; }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: 1.55fr repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .metric, .section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .metric { padding: 14px; min-height: 96px; }
+    .metric.balance-card { min-height: 126px; }
+    .label { color: var(--muted); font-size: .82rem; margin-bottom: 8px; }
+    .value { font-size: 1.65rem; font-weight: 780; }
+    .balance-card .value { font-size: 2.85rem; line-height: 1; }
+    .balance-detail { color: var(--muted); font-size: .86rem; margin-top: 12px; overflow-wrap: anywhere; }
+    .value.in { color: var(--in); }
+    .value.out { color: var(--out); }
+    .value.warn { color: var(--warn); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.35fr .9fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .section { padding: 14px; margin-bottom: 12px; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .axis { stroke: var(--line); stroke-width: 1; }
+    .bar.in { fill: var(--in); }
+    .bar.out { fill: var(--out); }
+    .bar.net { fill: var(--accent); }
+    .tick { fill: var(--muted); font-size: 10px; }
+    .empty { color: var(--muted); padding: 22px 0; text-align: center; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th { color: var(--muted); font-size: .78rem; font-weight: 700; }
+    td.amount { text-align: right; font-variant-numeric: tabular-nums; font-weight: 720; }
+    td.amount.in { color: var(--in); }
+    td.amount.out { color: var(--out); }
+    td.balance { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; font-weight: 650; }
+    td.date { color: var(--muted); width: 112px; white-space: nowrap; }
+    td.type { width: 120px; color: var(--muted); }
+    .dest { overflow-wrap: anywhere; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: .78rem;
+      white-space: nowrap;
+    }
+
+    .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--muted); }
+    .dot.in { background: var(--in); }
+    .dot.out { background: var(--out); }
+    .type-row { margin-bottom: 13px; }
+    .type-meta { color: var(--muted); font-size: .78rem; margin-top: 3px; }
+    .mini-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .mini {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px;
+      min-height: 74px;
+    }
+    .mini strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-top: 5px;
+      font-variant-numeric: tabular-nums;
+    }
+    .mini.primary strong { font-size: 1.42rem; }
+    .mini-note { color: var(--muted); font-size: .76rem; margin-top: 5px; overflow-wrap: anywhere; }
+
+    footer {
+      color: var(--muted);
+      font-size: .82rem;
+      padding: 8px 0;
+    }
+
+    @media (max-width: 860px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .status { text-align: left; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .mini-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .metric.balance-card { grid-column: 1 / -1; }
+      .balance-card .value { font-size: 2.25rem; }
+      .grid { grid-template-columns: 1fr; }
+      .value { font-size: 1.35rem; }
+      th:nth-child(3), td.type { display: none; }
+      th:nth-child(5), td.balance { display: none; }
+    }
+
+    @media (max-width: 520px) {
+      .wrap { width: min(100vw - 18px, 1180px); padding-top: 14px; }
+      .metrics { grid-template-columns: 1fr; }
+      .mini-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .balance-card .value { font-size: 2rem; }
+      th, td { padding: 9px 5px; }
+      td.date { width: 86px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div>
+        <h1>Mis Finanzas</h1>
+        <p class="sub">Movimientos desde descarga Santander</p>
+      </div>
+      <div class="status">
+        <div id="period">Periodo: -</div>
+        <div>Actualizado <span id="updated">-</span></div>
+      </div>
+    </header>
+
+    <section class="metrics">
+      <div class="metric balance-card">
+        <div class="label">Saldo Santander</div>
+        <div class="value" id="balance">$0</div>
+        <div class="balance-detail" id="balanceDetail">-</div>
+      </div>
+      <div class="metric">
+        <div class="label">Entradas</div>
+        <div class="value in" id="entries">$0</div>
+      </div>
+      <div class="metric">
+        <div class="label">Salidas</div>
+        <div class="value out" id="exits">$0</div>
+      </div>
+      <div class="metric">
+        <div class="label">Movimientos</div>
+        <div class="value warn" id="count">0</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="section">
+        <div class="section-head">
+          <h2>Flujo diario</h2>
+          <span class="pill"><span class="dot in"></span>Entrada <span class="dot out"></span>Salida</span>
+        </div>
+        <div id="dailyChart"></div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Salidas por tipo</h2>
+          <span class="pill">Top 6</span>
+        </div>
+        <div id="typeChart"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Ultimos movimientos</h2>
+        <span class="pill" id="sourceCount">0 fuentes</span>
+      </div>
+      <div id="table"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Tarjeta de crédito</h2>
+        <span class="pill" id="creditStatus">-</span>
+      </div>
+      <div id="creditCard"></div>
+    </section>
+
+    <footer>Datos sanitizados en origen cuando vienen desde TSV Santander.</footer>
+  </main>
+
+  <script>
+    const fmt = (n) => `${n < 0 ? "-" : ""}$${Math.abs(Math.round(n || 0)).toLocaleString("es-CL")}`;
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const sources = ["./data/cargos.json", "./data/santander-movimientos.json"];
+    const creditSource = "./data/tarjeta-credito.json";
+    const creditLiveSource = "./data/tarjeta-credito-actual.json";
+
+    async function loadJson(url) {
+      try {
+        const response = await fetch(`${url}?t=${Date.now()}`);
+        if (!response.ok) return { movimientos: [], failed: true, url };
+        return { ...(await response.json()), url };
+      } catch {
+        return { movimientos: [], failed: true, url };
+      }
+    }
+
+    function normalizeMovement(m) {
+      const direccion = m.direccion === "entrada" || m.direction === "in" ? "entrada" : "salida";
+      const fecha = String(m.fecha || m.date || "").slice(0, 10);
+      const hora = String(m.hora || "").slice(0, 5);
+      const monto = Math.abs(Number(m.monto ?? m.amount ?? 0));
+      const destino = m.destino || m.description || m.detalle || "Movimiento";
+      const tipo = m.tipo || (direccion === "entrada" ? "abono" : "otro");
+      const fuente = m.fuente || "local";
+      const uid = m.uid || [fecha, hora, direccion, monto, destino].join("|");
+
+      const saldo = Number(m.saldo ?? m.saldo_actual ?? NaN);
+      const sourceOrder = Number(m.source_order ?? NaN);
+
+      return {
+        uid,
+        fecha,
+        hora,
+        direccion,
+        monto,
+        saldo: Number.isFinite(saldo) ? saldo : null,
+        source_order: Number.isFinite(sourceOrder) ? sourceOrder : null,
+        destino,
+        tipo,
+        fuente,
+        es_sueldo: Boolean(m.es_sueldo)
+      };
+    }
+
+    function compareNewestFirst(a, b) {
+      if (Number.isFinite(a.source_order) && Number.isFinite(b.source_order)) {
+        return a.source_order - b.source_order;
+      }
+
+      const dateCompare = String(b.fecha || "").localeCompare(String(a.fecha || ""));
+      if (dateCompare !== 0) return dateCompare;
+
+      if (a.hora && b.hora && a.hora !== b.hora) {
+        return String(b.hora).localeCompare(String(a.hora));
+      }
+
+      return 0;
+    }
+
+    function mergeMovements(payloads) {
+      const byId = new Map();
+      for (const payload of payloads) {
+        const movements = payload.movimientos || (payload.cargos || []).map((c) => ({ ...c, direccion: c.direccion || "salida" }));
+        for (const raw of movements) {
+          const movement = normalizeMovement(raw);
+          if (movement.fecha && movement.monto > 0) byId.set(movement.uid, movement);
+        }
+      }
+      return [...byId.values()].sort(compareNewestFirst);
+    }
+
+    function initialBalance(payloads) {
+      return payloads.reduce((sum, payload) => sum + Number(payload.saldo_inicial || 0), 0);
+    }
+
+    function periodStart(movements, payloads) {
+      const configured = payloads.map((payload) => payload.inicio_periodo).filter(Boolean).sort().pop();
+      if (configured) return String(configured).slice(0, 10);
+
+      const salaries = movements.filter((m) => m.es_sueldo || m.tipo === "sueldo");
+      if (salaries.length) return salaries[0].fecha;
+      const fallback = new Date();
+      fallback.setDate(fallback.getDate() - 30);
+      return fallback.toISOString().slice(0, 10);
+    }
+
+    function summarize(movements, start, saldoInicial) {
+      const scoped = movements.filter((m) => m.fecha >= start);
+      const entradas = scoped.filter((m) => m.direccion === "entrada").reduce((s, m) => s + m.monto, 0);
+      const salidas = scoped.filter((m) => m.direccion === "salida").reduce((s, m) => s + m.monto, 0);
+      return { scoped, entradas, salidas, balance: saldoInicial + entradas - salidas };
+    }
+
+    function dateRange(days) {
+      const end = new Date();
+      const out = [];
+      for (let i = days - 1; i >= 0; i -= 1) {
+        const date = new Date(end);
+        date.setDate(end.getDate() - i);
+        out.push(date.toISOString().slice(0, 10));
+      }
+      return out;
+    }
+
+    function renderDailyChart(movements) {
+      const days = dateRange(30);
+      const byDate = new Map(days.map((day) => [day, { in: 0, out: 0 }]));
+      for (const movement of movements) {
+        if (!byDate.has(movement.fecha)) continue;
+        const bucket = byDate.get(movement.fecha);
+        if (movement.direccion === "entrada") bucket.in += movement.monto;
+        else bucket.out += movement.monto;
+      }
+
+      const values = days.map((day) => byDate.get(day));
+      const max = Math.max(1, ...values.flatMap((v) => [v.in, v.out]));
+      const width = 720;
+      const height = 220;
+      const pad = 26;
+      const base = 110;
+      const slot = (width - pad * 2) / days.length;
+      const bar = Math.max(4, slot * .34);
+
+      const bars = values.map((v, i) => {
+        const x = pad + i * slot + slot * .18;
+        const inH = Math.max(1, (v.in / max) * (base - pad));
+        const outH = Math.max(1, (v.out / max) * (height - base - pad));
+        return `
+          <rect class="bar in" x="${x}" y="${base - inH}" width="${bar}" height="${inH}"><title>${days[i]} entrada ${fmt(v.in)}</title></rect>
+          <rect class="bar out" x="${x + bar + 2}" y="${base}" width="${bar}" height="${outH}"><title>${days[i]} salida ${fmt(v.out)}</title></rect>
+        `;
+      }).join("");
+
+      const ticks = days.filter((_, i) => i % 5 === 0 || i === days.length - 1).map((day, i) => {
+        const index = days.indexOf(day);
+        const x = pad + index * slot;
+        return `<text class="tick" x="${x}" y="${height - 4}">${day.slice(5)}</text>`;
+      }).join("");
+
+      return `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Flujo diario">
+        <line class="axis" x1="${pad}" x2="${width - pad}" y1="${base}" y2="${base}"></line>
+        ${bars}
+        ${ticks}
+      </svg>`;
+    }
+
+    function renderTypeChart(movements) {
+      const totals = new Map();
+      for (const m of movements.filter((m) => m.direccion === "salida")) {
+        const item = totals.get(m.tipo) || { amount: 0, count: 0, latest: null };
+        item.amount += m.monto;
+        item.count += 1;
+        if (!item.latest || compareNewestFirst(m, item.latest) < 0) item.latest = m;
+        totals.set(m.tipo, item);
+      }
+
+      const totalOut = [...totals.values()].reduce((sum, item) => sum + item.amount, 0);
+      const rows = [...totals.entries()].sort((a, b) => b[1].amount - a[1].amount).slice(0, 8);
+      if (!rows.length) return '<div class="empty">Sin salidas en el periodo.</div>';
+
+      const max = Math.max(...rows.map((row) => row[1].amount), 1);
+      return rows.map(([tipo, item]) => {
+        const amount = item.amount;
+        const width = Math.max(2, (amount / max) * 100);
+        const pct = totalOut ? Math.round((amount / totalOut) * 100) : 0;
+        const latest = item.latest ? `${item.latest.fecha} · ${item.latest.destino}` : "-";
+        return `<div class="type-row">
+          <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:5px">
+            <span>${esc(tipo)}</span><strong>${fmt(amount)}</strong>
+          </div>
+          <div class="type-meta">${item.count} mov. · ${pct}% de salidas · último ${esc(latest)}</div>
+          <div style="height:9px;background:var(--panel-2);border-radius:999px;overflow:hidden">
+            <div style="height:100%;width:${width}%;background:var(--out)"></div>
+          </div>
+        </div>`;
+      }).join("");
+    }
+
+    function renderTable(movements) {
+      const recent = [...movements].sort(compareNewestFirst).slice(0, 45);
+      if (!recent.length) return '<div class="empty">Sin movimientos para mostrar.</div>';
+
+      return `<table>
+        <thead>
+          <tr><th>Fecha</th><th>Detalle</th><th>Tipo</th><th style="text-align:right">Monto</th><th style="text-align:right">Saldo</th></tr>
+        </thead>
+        <tbody>
+          ${recent.map((m) => `<tr>
+            <td class="date">${esc(m.hora ? `${m.fecha} ${m.hora}` : m.fecha)}</td>
+            <td><div class="dest">${esc(m.destino)}</div><div class="sub">${esc(m.fuente)}</div></td>
+            <td class="type">${esc(m.tipo)}</td>
+            <td class="amount ${m.direccion === "entrada" ? "in" : "out"}">${m.direccion === "entrada" ? "+" : "-"}${fmt(m.monto)}</td>
+            <td class="balance">${Number.isFinite(m.saldo) ? fmt(m.saldo) : "-"}</td>
+          </tr>`).join("")}
+        </tbody>
+      </table>`;
+    }
+
+    function validNumber(value) {
+      const number = Number(value);
+      return Number.isFinite(number) ? number : null;
+    }
+
+    function renderCreditLiveMetrics(livePayload, statementPayload) {
+      const liveAvailable = livePayload && !livePayload.failed ? validNumber(livePayload.cupo_disponible) : null;
+      const liveUsed = livePayload && !livePayload.failed ? validNumber(livePayload.cupo_utilizado) : null;
+      const liveTotal = livePayload && !livePayload.failed
+        ? validNumber(livePayload.cupo_total) ?? validNumber(statementPayload?.cupo_total)
+        : validNumber(statementPayload?.cupo_total);
+      const liveBilled = livePayload && !livePayload.failed
+        ? validNumber(livePayload.facturado?.deuda_facturada) ?? validNumber(livePayload.facturado?.deuda_total_facturada)
+        : null;
+      const liveUnbilled = livePayload && !livePayload.failed
+        ? validNumber(livePayload.por_facturar?.total_neto) ?? validNumber(livePayload.facturado?.deuda_no_facturada)
+        : null;
+      const liveUpdated = livePayload?.ultimo_ok || livePayload?.actualizado || "";
+      const liveStatus = livePayload?.estado || (livePayload?.failed ? "sin datos" : "");
+
+      if (liveAvailable === null && liveUsed === null && liveTotal === null && liveBilled === null && liveUnbilled === null) return "";
+
+      const note = liveUpdated ? new Date(liveUpdated).toLocaleString("es-CL") : liveStatus || "-";
+      return `
+        <div class="mini primary"><div class="label">Cupo disp. actual</div><strong>${liveAvailable === null ? "-" : fmt(liveAvailable)}</strong><div class="mini-note">${esc(note)}</div></div>
+        <div class="mini"><div class="label">Cupo usado actual</div><strong>${liveUsed === null ? "-" : fmt(liveUsed)}</strong></div>
+        <div class="mini"><div class="label">Cupo total</div><strong>${liveTotal === null ? "-" : fmt(liveTotal)}</strong></div>
+        <div class="mini"><div class="label">Facturado web</div><strong>${liveBilled === null ? "-" : fmt(liveBilled)}</strong></div>
+        <div class="mini"><div class="label">Por facturar web</div><strong>${liveUnbilled === null ? "-" : fmt(liveUnbilled)}</strong></div>
+      `;
+    }
+
+    function renderLiveCardMovements(livePayload) {
+      const movements = Array.isArray(livePayload?.por_facturar?.movimientos)
+        ? livePayload.por_facturar.movimientos.filter((m) => !m.es_saldo_inicial).slice(0, 12)
+        : [];
+      if (!movements.length) return "";
+
+      return `<div style="margin-bottom:14px">
+        <div class="section-head"><h2>Movimientos web recientes</h2><span class="pill">${fmt(livePayload.por_facturar.total_neto || 0)}</span></div>
+        <table>
+          <thead>
+            <tr><th>Fecha</th><th>Comercio</th><th>Tipo</th><th style="text-align:right">Monto</th></tr>
+          </thead>
+          <tbody>
+            ${movements.map((m) => `<tr>
+              <td class="date">${esc(m.fecha)}</td>
+              <td><div class="dest">${esc(m.comercio || m.descripcion)}</div><div class="sub">${esc(m.descripcion || "tarjeta")}</div></td>
+              <td class="type">${esc(m.rubro || "tarjeta")}</td>
+              <td class="amount ${m.direccion === "entrada" ? "in" : "out"}">${m.direccion === "entrada" ? "+" : "-"}${fmt(m.monto)}</td>
+            </tr>`).join("")}
+          </tbody>
+        </table>
+      </div>`;
+    }
+
+    function renderCreditCard(payload, livePayload) {
+      if (!payload || payload.failed || !Array.isArray(payload.movimientos)) {
+        document.getElementById("creditStatus").textContent = "sin datos";
+        const liveMetrics = renderCreditLiveMetrics(livePayload, payload);
+        return liveMetrics
+          ? `<div class="mini-metrics">${liveMetrics}</div><div class="empty">Sin estado de cuenta cargado.</div>`
+          : '<div class="empty">Sin estado de cuenta cargado.</div>';
+      }
+
+      const movements = payload.movimientos;
+      const charges = movements.filter((m) => m.direccion !== "entrada");
+      const payments = movements.filter((m) => m.direccion === "entrada");
+      const charged = charges.reduce((sum, m) => sum + Number(m.monto || 0), 0);
+      const paid = payments.reduce((sum, m) => sum + Number(m.monto || 0), 0);
+      const byType = Array.isArray(payload.por_tipo) ? payload.por_tipo : [];
+      const recent = movements.slice(0, 14);
+
+      document.getElementById("creditStatus").textContent = payload.estado_cuenta_fecha || "estado";
+      const liveMetrics = renderCreditLiveMetrics(livePayload, payload);
+
+      const typeRows = byType.slice(0, 7).map((item) => {
+        const pct = charged ? Math.round((Number(item.monto || 0) / charged) * 100) : 0;
+        return `<div class="type-row">
+          <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:5px">
+            <span>${esc(item.tipo)}</span><strong>${fmt(item.monto)}</strong>
+          </div>
+          <div class="type-meta">${Number(item.cantidad || 0)} mov. · ${pct}% del estado</div>
+          <div style="height:9px;background:var(--panel-2);border-radius:999px;overflow:hidden">
+            <div style="height:100%;width:${Math.max(2, pct)}%;background:var(--accent)"></div>
+          </div>
+        </div>`;
+      }).join("");
+
+      const table = recent.length ? `<table>
+        <thead>
+          <tr><th>Fecha</th><th>Detalle</th><th>Tipo</th><th style="text-align:right">Monto</th></tr>
+        </thead>
+        <tbody>
+          ${recent.map((m) => `<tr>
+            <td class="date">${esc(m.fecha)}</td>
+            <td><div class="dest">${esc(m.descripcion)}</div><div class="sub">${esc(m.lugar || m.seccion || "tarjeta")}</div></td>
+            <td class="type">${esc(m.tipo)}</td>
+            <td class="amount ${m.direccion === "entrada" ? "in" : "out"}">${m.direccion === "entrada" ? "+" : "-"}${fmt(m.monto)}</td>
+          </tr>`).join("")}
+        </tbody>
+      </table>` : '<div class="empty">Sin movimientos en la cartola.</div>';
+
+      return `
+        <div class="mini-metrics">
+          ${liveMetrics}
+          <div class="mini"><div class="label">Total facturado</div><strong>${fmt(payload.monto_total_facturado)}</strong></div>
+          <div class="mini"><div class="label">Pagar hasta</div><strong>${esc(payload.pagar_hasta || "-")}</strong></div>
+          <div class="mini"><div class="label">Cupo usado cierre</div><strong>${fmt(payload.cupo_utilizado)}</strong></div>
+          <div class="mini"><div class="label">Cupo disp. cierre</div><strong>${fmt(payload.cupo_disponible)}</strong></div>
+          <div class="mini"><div class="label">Pagos cartola</div><strong>${fmt(paid)}</strong></div>
+        </div>
+        ${renderLiveCardMovements(livePayload)}
+        <div class="grid">
+          <div>
+            <div class="section-head"><h2>Movimientos cartola</h2><span class="pill">${movements.length} filas</span></div>
+            ${table}
+          </div>
+          <div>
+            <div class="section-head"><h2>Tarjeta por tipo</h2><span class="pill">${fmt(charged)}</span></div>
+            ${typeRows || '<div class="empty">Sin cargos clasificados.</div>'}
+          </div>
+        </div>`;
+    }
+
+    async function main() {
+      const [payloads, creditPayload, creditLivePayload] = await Promise.all([
+        Promise.all(sources.map(loadJson)),
+        loadJson(creditSource),
+        loadJson(creditLiveSource)
+      ]);
+      const basePayload = payloads[0] || {};
+      const santanderPayload = payloads[1] || {};
+      const movements = mergeMovements([santanderPayload]);
+      const saldoInicial = initialBalance([basePayload]);
+      const start = periodStart(movements, [basePayload]);
+      const summary = summarize(movements, start, saldoInicial);
+      const saldoSantander = Number(santanderPayload.saldo_actual);
+      const displayBalance = Number.isFinite(saldoSantander) ? saldoSantander : summary.balance;
+      const latest = santanderPayload.ultimo_movimiento ? normalizeMovement(santanderPayload.ultimo_movimiento) : movements[0];
+      const newestUpdate = payloads.map((p) => p.actualizado).filter(Boolean).sort().pop();
+
+      document.getElementById("period").textContent = `Periodo: ${start} a hoy`;
+      document.getElementById("updated").textContent = newestUpdate ? new Date(newestUpdate).toLocaleString("es-CL") : "-";
+      document.getElementById("balance").textContent = fmt(displayBalance);
+      document.getElementById("balance").className = `value ${displayBalance < 0 ? "out" : "in"}`;
+      document.getElementById("balanceDetail").textContent = latest
+        ? `Último: ${latest.direccion === "entrada" ? "+" : "-"}${fmt(latest.monto)} · ${latest.tipo} · ${latest.fecha} · ${latest.destino}`
+        : "-";
+      document.getElementById("entries").textContent = fmt(summary.entradas);
+      document.getElementById("exits").textContent = fmt(summary.salidas);
+      document.getElementById("count").textContent = String(summary.scoped.length);
+      document.getElementById("dailyChart").innerHTML = renderDailyChart(summary.scoped);
+      document.getElementById("typeChart").innerHTML = renderTypeChart(summary.scoped);
+      document.getElementById("table").innerHTML = renderTable(summary.scoped);
+      document.getElementById("sourceCount").textContent = `${payloads.filter((p) => !p.failed).length} fuentes`;
+      document.getElementById("creditCard").innerHTML = renderCreditCard(creditPayload, creditLivePayload);
+    }
+
+    function renderError() {
+      document.getElementById("table").innerHTML = '<div class="empty">No se pudieron cargar los datos.</div>';
+    }
+
+    main().catch(renderError);
+    setInterval(() => main().catch(renderError), 60_000);
+  </script>
+</body>
+</html>
