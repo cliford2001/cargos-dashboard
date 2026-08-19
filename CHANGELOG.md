@@ -1,9 +1,5 @@
-# Changelog
+# Mejoras de diseño para el dashboard de finanzas personales
 
 ## 2026-08-18
-
-- diseño: Mejorar tipografía y jerarquía visual con Inter, espaciado refinado y ligaduras OpenType para un look premium.
-
-> Todos los cambios están basados en el modelo de datos actual (`data/cargos.json`) y respetan el fetch original.
-
-> El dashboard sigue mostrando Entradas, Salidas, Balance y periodo salarial de forma clara y visible.
+- Añadido estilo tipográfico premium con jerarquía clara y fuentes web-safe para mejor legibilidad y profesionalismo### 2026-08-18
+- Añadido modo claro/oscuro con soporte completo a `prefers-color-scheme` y animaciones suaves. Rediseñado el header con marca SVG personalizada y tipografía premium.
