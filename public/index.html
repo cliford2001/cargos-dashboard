@@ -409,6 +409,36 @@
     .insight span { display: block; color: var(--muted); font-size: .68rem; margin-bottom: 4px; }
     .insight strong { display: block; font-size: .87rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .analysis-card {
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface-subtle);
+    }
+
+    .analysis-card.wide { grid-column: span 2; }
+    .analysis-card h3 { margin-bottom: 4px; }
+    .analysis-card > p { color: var(--muted); font-size: .7rem; margin-bottom: 11px; }
+
+    .radar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: var(--line); }
+    .radar-item { min-width: 0; padding: 9px; background: var(--surface); }
+    .radar-item span { display: block; color: var(--muted); font-size: .66rem; margin-bottom: 3px; }
+    .radar-item strong { display: block; font-size: .85rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+    .rank-list { display: grid; gap: 10px; }
+    .rank-row { min-width: 0; }
+    .rank-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: .76rem; }
+    .rank-top span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 650; }
+    .rank-top strong { flex: 0 0 auto; font-variant-numeric: tabular-nums; }
+    .rank-meta { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: .66rem; margin-top: 2px; }
+
     .table-tools {
       display: grid;
       grid-template-columns: minmax(180px, 1fr) 148px;
@@ -546,6 +576,7 @@
     @media (max-width: 1040px) {
       .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .dashboard-grid, .credit-grid { grid-template-columns: 1fr; }
+      .analysis-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .credit-overview { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .credit-stat.primary { grid-column: span 2; }
     }
@@ -566,6 +597,8 @@
       .panel { padding: 13px; }
       .chart-shell { min-height: 190px; }
       .insights { grid-template-columns: 1fr; }
+      .analysis-grid { grid-template-columns: 1fr; }
+      .analysis-card.wide { grid-column: auto; }
       .panel-head.table-head { align-items: stretch; flex-direction: column; }
       .table-tools { width: 100%; }
       .credit-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -605,6 +638,7 @@
       </div>
       <nav class="top-nav" aria-label="Secciones">
         <a href="#resumen">Resumen</a>
+        <a href="#analisis">Análisis</a>
         <a href="#cuenta">Cuenta</a>
         <a href="#tarjeta">Tarjeta</a>
       </nav>
@@ -706,6 +740,33 @@
         </div>
         <div id="latestMovement"></div>
       </article>
+    </section>
+
+    <section class="panel" id="analisis" aria-labelledby="analysisTitle">
+      <div class="panel-head">
+        <div class="panel-title">
+          <h2 id="analysisTitle">Análisis de gastos</h2>
+          <p>Montos obtenidos del banco; los traspasos a ahorro se separan del gasto y la proyección usa el ritmo del período.</p>
+        </div>
+        <span class="badge" id="analysisBadge">-</span>
+      </div>
+      <div class="analysis-grid">
+        <article class="analysis-card wide">
+          <h3>Radar del gasto</h3>
+          <p>Ritmo y comparación para detectar cambios.</p>
+          <div class="radar-grid" id="spendingRadar"></div>
+        </article>
+        <article class="analysis-card">
+          <h3>Comercios principales</h3>
+          <p>En qué lugares se concentra el gasto.</p>
+          <div class="rank-list" id="merchantRanking"></div>
+        </article>
+        <article class="analysis-card">
+          <h3>Gastos repetidos</h3>
+          <p>Comercios que aparecen dos o más veces.</p>
+          <div class="rank-list" id="recurringRanking"></div>
+        </article>
+      </div>
     </section>
 
     <section class="panel" aria-labelledby="movementsTitle">
@@ -926,7 +987,10 @@
     function summarize(movements) {
       const entries = movements.filter((m) => m.direccion === "entrada").reduce((sum, m) => sum + m.monto, 0);
       const exits = movements.filter((m) => m.direccion === "salida").reduce((sum, m) => sum + m.monto, 0);
-      return { entries, exits, net: entries - exits, count: movements.length };
+      const savings = movements
+        .filter((m) => m.direccion === "salida" && m.tipo === "ahorro")
+        .reduce((sum, m) => sum + m.monto, 0);
+      return { entries, exits, savings, expenses: exits - savings, net: entries - exits, count: movements.length };
     }
 
     function groupByDate(movements) {
@@ -1055,6 +1119,102 @@
           <div class="bar-track"><div class="bar-fill ${options.blue ? "blue" : ""}" style="width:${Math.max(2, item.amount / max * 100)}%"></div></div>
         </div>`;
       }).join("");
+    }
+
+    function merchantName(value) {
+      return String(value || "Movimiento")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function totalForDateRange(movements, start, end) {
+      return movements
+        .filter((movement) => movement.direccion === "salida" && movement.tipo !== "ahorro")
+        .filter((movement) => {
+          const date = parseDate(movement.fecha);
+          return date && date >= start && date <= end;
+        })
+        .reduce((sum, movement) => sum + movement.monto, 0);
+    }
+
+    function spendingAnalysis(movements, referenceMovements = movements) {
+      const savings = movements
+        .filter((movement) => movement.direccion === "salida" && movement.tipo === "ahorro")
+        .reduce((sum, movement) => sum + movement.monto, 0);
+      const exits = movements.filter((movement) => movement.direccion === "salida" && movement.tipo !== "ahorro");
+      const total = exits.reduce((sum, movement) => sum + movement.monto, 0);
+      const dates = exits.map((movement) => parseDate(movement.fecha)).filter(Boolean).sort((a, b) => a - b);
+      const calendarDays = dates.length ? Math.max(1, Math.round((dates.at(-1) - dates[0]) / 86_400_000) + 1) : 1;
+      const activeDays = new Set(exits.map((movement) => movement.fecha)).size || 1;
+      const merchants = new Map();
+
+      for (const movement of exits) {
+        const name = merchantName(movement.destino);
+        const key = name.toLocaleLowerCase("es");
+        const item = merchants.get(key) || { name, amount: 0, count: 0, lastDate: movement.fecha };
+        item.amount += movement.monto;
+        item.count += 1;
+        if (movement.fecha > item.lastDate) item.lastDate = movement.fecha;
+        merchants.set(key, item);
+      }
+
+      const sortedMerchants = [...merchants.values()].sort((a, b) => b.amount - a.amount || b.count - a.count);
+      const referenceDates = referenceMovements.map((movement) => parseDate(movement.fecha)).filter(Boolean).sort((a, b) => b - a);
+      const latest = referenceDates[0];
+      let recentWeek = null;
+      let previousWeek = null;
+      if (latest) {
+        const recentStart = new Date(latest);
+        recentStart.setDate(recentStart.getDate() - 6);
+        const previousEnd = new Date(recentStart);
+        previousEnd.setDate(previousEnd.getDate() - 1);
+        const previousStart = new Date(previousEnd);
+        previousStart.setDate(previousStart.getDate() - 6);
+        recentWeek = totalForDateRange(referenceMovements, recentStart, latest);
+        previousWeek = totalForDateRange(referenceMovements, previousStart, previousEnd);
+      }
+
+      return {
+        exits,
+        total,
+        savings,
+        activeDays,
+        calendarDays,
+        averageTransaction: exits.length ? total / exits.length : 0,
+        averageCalendarDay: total / calendarDays,
+        merchants: sortedMerchants,
+        recurring: sortedMerchants.filter((item) => item.count >= 2),
+        recentWeek,
+        previousWeek
+      };
+    }
+
+    function renderRanking(rows, total, emptyCopy) {
+      if (!rows.length) return `<div class="empty">${escapeHtml(emptyCopy)}</div>`;
+      const max = Math.max(...rows.map((row) => row.amount), 1);
+      return rows.slice(0, 5).map((row) => {
+        const percentage = total ? Math.round(row.amount / total * 100) : 0;
+        return `<div class="rank-row">
+          <div class="rank-top"><span title="${escapeHtml(row.name)}">${escapeHtml(row.name)}</span><strong>${formatMoney(row.amount)}</strong></div>
+          <div class="rank-meta"><span>${row.count} ${row.count === 1 ? "cargo" : "cargos"} · ${percentage}%</span><span>${formatDate(row.lastDate, { short: true })}</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.max(2, row.amount / max * 100)}%"></div></div>
+        </div>`;
+      }).join("");
+    }
+
+    function renderSpendingRadar(analysis) {
+      const weekCopy = analysis.recentWeek === null
+        ? "Sin historial suficiente"
+        : analysis.previousWeek
+          ? `${analysis.recentWeek >= analysis.previousWeek ? "+" : ""}${Math.round((analysis.recentWeek - analysis.previousWeek) / analysis.previousWeek * 100)}% vs. 7 días previos`
+          : "Primer tramo de 7 días";
+      const projected = analysis.averageCalendarDay * 30;
+      return `<div class="radar-item"><span>Gasto total</span><strong>${formatMoney(analysis.total)}</strong></div>
+        <div class="radar-item"><span>Ahorro transferido</span><strong>${formatMoney(analysis.savings)}</strong></div>
+        <div class="radar-item"><span>Promedio por cargo</span><strong>${formatMoney(analysis.averageTransaction)}</strong></div>
+        <div class="radar-item"><span>Ritmo diario</span><strong>${formatMoney(analysis.averageCalendarDay)}</strong></div>
+        <div class="radar-item"><span>Proyección a 30 días</span><strong>${formatMoney(projected)}</strong></div>
+        <div class="radar-item"><span>Comparación semanal</span><strong>${weekCopy}</strong></div>`;
     }
 
     function renderStatementCategories(payload) {
@@ -1230,6 +1390,7 @@
       const allMovements = normalizeAccount(account);
       const movements = scopedMovements(allMovements);
       const summary = summarize(movements);
+      const analysis = spendingAnalysis(movements, allMovements);
       const balance = validNumber(account?.saldo_actual);
       const latest = account?.ultimo_movimiento ? normalizeMovement(account.ultimo_movimiento) : allMovements[0];
       const available = validNumber(creditLive?.cupo_disponible);
@@ -1258,6 +1419,10 @@
       document.getElementById("flowInsights").innerHTML = renderFlowInsights(movements, summary);
       document.getElementById("categoryChart").innerHTML = renderCategoryList(movements);
       document.getElementById("categoryBadge").textContent = `${formatMoney(summary.exits)} total`;
+      document.getElementById("analysisBadge").textContent = `${analysis.exits.length} gastos · ${formatMoney(analysis.savings)} ahorro`;
+      document.getElementById("spendingRadar").innerHTML = renderSpendingRadar(analysis);
+      document.getElementById("merchantRanking").innerHTML = renderRanking(analysis.merchants, analysis.total, "Sin comercios para analizar.");
+      document.getElementById("recurringRanking").innerHTML = renderRanking(analysis.recurring, analysis.total, "No hay gastos repetidos en este período.");
       document.getElementById("balanceChart").innerHTML = renderBalanceChart(movements);
       document.getElementById("latestDate").textContent = latest ? formatDate(latest.fecha, { short: true, year: true }) : "-";
       document.getElementById("latestMovement").innerHTML = renderLatestMovement(latest);

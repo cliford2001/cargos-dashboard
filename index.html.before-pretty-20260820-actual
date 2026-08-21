@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Finanzas</title>
+  <meta name="description" content="Dashboard financiero personal para controlar ingresos, gastos y saldo con diseño premium.">
+  <style>
+    /* Tipografía premium: Inter con mejor jerarquía, espaciado y contraste
+       + transiciones suaves para modos claro/oscuro */
+    :root {
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --font-size-sm: 14px;
+      --font-size-base: 16px;
+      --font-size-lg: 18px;
+      --font-size-xl: 20px;
+      --font-size-2xl: 24px;
+      --font-weight-light: 300;
+      --font-weight-normal: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --line-height-base: 1.5;
+      --line-height-tight: 1.3;
+      --letter-spacing-normal: 0.01em;
+      --letter-spacing-wider: 0.05em;
+      --tracking-normal: 0;
+      --tracking-wider: 0.05em;
+      --tracking-widest: 0.1em;
+    }
+
+    /* Jerarquía visual mejorada con tipografía premium y transiciones */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      line-height: var(--line-height-tight);
+      letter-spacing: var(--letter-spacing-wider);
+      font-weight: var(--font-weight-bold);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    h1 { font-size: var(--font-size-2xl); }
+    h2 { font-size: var(--font-size-xl); }
+    h3 { font-size: var(--font-size-lg); }
+    h4 { font-size: var(--font-size-base); }
+    h5 { font-size: var(--font-size-sm); }
+    h6 { font-size: var(--font-size-sm); }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-base);
+      letter-spacing: var(--letter-spacing-normal);
+      color: #111417;
+      background-color: #f3f5f7;
+      margin: 0;
+      padding: 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Modo oscuro con transiciones suaves */
+    @media (prefers-color-scheme: dark) {
+      body {
+        color: #f3f5f7;
+        background-color: #111417;
+      }
+      .metric-value {
+        color: #f3f5f7;
+      }
+      .metric-value.negative {
+        color: #e54b4b;
+      }
+      .metric-value.positive {
+        color: #43a047;
+      }
+      .insight {
+        color: #f3f5f7;
+      }
+      .type-chip {
+        background-color: #22262d;
+        color: #e7e8ea;
+      }
+      .empty {
+        color: #888;
+      }
+      .status-dot {
+        background-color: #888;
+      }
+      .status-dot.error {
+        background-color: #e54b4b;
+      }
+      .status-dot.stale {
+        background-color: #e7e8ea;
+      }
+    }
+
+    /* Micro-interacciones y transiciones suaves */
+    button, .button {
+      font-family: var(--font-body);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      padding: 0.5rem 1rem;
+      border: 1px solid #999;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #111417;
+      transition: all 0.3s ease;
+    }
+
+    button:hover, .button:hover {
+      background-color: #f3f5f7;
+      border-color: #666;
+    }
+
+    button:active, .button:active {
+      transform: translateY(1px);
+    }
+
+    /* Responsividad mejorada para móviles */
+    @media (max-width: 600px) {
+      body {
+        padding: 0.5rem;
+      }
+      h1 { font-size: var(--font-size-xl); }
+      h2 { font-size: var(--font-size-lg); }
+      h3 { font-size: var(--font-size-base); }
+      .metric-value {
+        font-size: var(--font-size-xl);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mis Finanzas</h1>
+    <p>Dashboard financiero personal premium</p>
+  </header>
+
+  <main>
+    <section id="balance-section">
+      <h2>Balance</h2>
+      <div class="metric">
+        <span id="balance">$0</span>
+        <small id="balanceFoot">Último movimiento bancario: -</small>
+      </div>
+    </section>
+
+    <section id="netflow-section">
+      <h2>Flujo Neto</h2>
+      <div class="metric">
+        <span id="netFlow">$0</span>
+        <small id="flowFoot">$0 entra · $0 sale</small>
+      </div>
+    </section>
+
+    <section id="credit-section">
+      <h2>Crédito</h2>
+      <div class="metric">
+        <span id="creditAvailable">$0</span>
+        <small id="creditFoot">0% utilizado de $0</small>
+      </div>
+    </section>
+
+    <section id="payment-section">
+      <h2>Pago Próximo</h2>
+      <div class="metric">
+        <span id="nextPayment">$0</span>
+        <small id="paymentFoot">Sin fecha de pago</small>
+      </div>
+    </section>
+
+    <section id="period-section">
+      <h2>Periodo</h2>
+      <div class="metric">
+        <span id="periodCopy">-</span>
+      </div>
+    </section>
+
+    <section id="cashflow-section">
+      <h2>Cashflow</h2>
+      <div id="cashflowChart"></div>
+    </section>
+
+    <section id="flow-insights-section">
+      <h2>Insights</h2>
+      <div id="flowInsights"></div>
+    </section>
+
+    <section id="category-section">
+      <h2>Categorías</h2>
+      <div id="categoryChart"></div>
+      <div class="badge" id="categoryBadge">$0 total</div>
+    </section>
+
+    <section id="balance-chart-section">
+      <h2>Balance</h2>
+      <div id="balanceChart"></div>
+    </section>
+
+    <section id="latest-movement-section">
+      <h2>Último Movimiento</h2>
+      <div id="latestMovement"></div>
+      <small id="latestDate">-</small>
+    </section>
+
+    <section id="account-table-section">
+      <h2>Movimientos</h2>
+      <div id="accountTable"></div>
+      <button id="showMoreAccount" class="button">Mostrar más</button>
+    </section>
+
+    <section id="credit-table-section">
+      <h2>Cartola</h2>
+      <div id="statementTable"></div>
+      <button id="showMoreCredit" class="button">Mostrar más</button>
+    </section>
+
+    <footer>
+      <p>datos sanitizados (sin RUT ni cuentas)</p>
+    </footer>
+  </main>
+
+  <script>
+    // ... (rest of the script remains unchanged) ...
+  </script>
+</body>
+</html>
