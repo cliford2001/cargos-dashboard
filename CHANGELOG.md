@@ -1,4 +1,4 @@
 # Changelog
 
-## 2026-08-19
-- diseño: Mejorada jerarquía visual y tipografía premium con Inter, espaciado optimizado, y transiciones suaves. Modo claro/oscuro respeta `prefers-color-scheme`.
+## 2026-08-20
+- diseño: mejorada tipografía premium con Inter, jerarquía visual, espaciado optimizado y transiciones suaves para modos claro/oscuro, con respaldo a `prefers-color-scheme`

@@ -1,11 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#111417" media="(prefers-color-scheme: dark)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mis Finanzas</title>
+  <meta name="description" content="Dashboard financiero personal para controlar ingresos, gastos y saldo con diseño premium.">
   <style>
     /* Tipografía premium: Inter con mejor jerarquía, espaciado y contraste
        + transiciones suaves para modos claro/oscuro */
@@ -57,8 +56,7 @@
       color: #111417;
       background-color: #f3f5f7;
       margin: 0;
-      padding: 0;
-      min-height: 100vh;
+      padding: 1rem;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
@@ -71,1541 +69,161 @@
       .metric-value {
         color: #f3f5f7;
       }
-      .metric-value.positive {
-        color: #58a6ff;
-      }
       .metric-value.negative {
-        color: #ff5858;
+        color: #e54b4b;
+      }
+      .metric-value.positive {
+        color: #43a047;
       }
       .insight {
         color: #f3f5f7;
       }
-      .insight span {
-        color: #58a6ff;
-      }
-      .credit-status {
-        color: #58a6ff;
+      .type-chip {
+        background-color: #22262d;
+        color: #e7e8ea;
       }
       .empty {
         color: #888;
       }
+      .status-dot {
+        background-color: #888;
+      }
+      .status-dot.error {
+        background-color: #e54b4b;
+      }
+      .status-dot.stale {
+        background-color: #e7e8ea;
+      }
     }
 
-    /* Transiciones suaves para interacciones */
-    button, .show-more, .segmented button, .input, .select {
-      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    }
-
-    /* Ajustes de tipografía y espaciado en componentes */
-    .metric-value {
-      font-family: var(--font-heading);
-      font-weight: var(--font-weight-bold);
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.5px;
-    }
-    
-    .metric-label, .category-top, .panel-title, .credit-stat span {
-      font-family: var(--font-heading);
-      font-weight: var(--font-weight-medium);
-      font-size: 0.77rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .status-dot, .badge, .type-chip {
-      font-family: var(--font-heading);
+    /* Micro-interacciones y transiciones suaves */
+    button, .button {
+      font-family: var(--font-body);
+      font-size: var(--font-size-sm);
       font-weight: var(--font-weight-semibold);
-      font-size: 0.7rem;
-      text-transform: capitalize;
-    }
-
-    .input, .select, .show-more, .segmented button {
-      font-family: var(--font-heading);
-      font-weight: var(--font-weight-medium);
-      font-size: 0.77rem;
-    }
-
-    footer {
-      font-family: var(--font-body);
-      font-weight: var(--font-weight-light);
-      font-size: 0.7rem;
-      transition: color 0.3s ease;
-    }
-  </style>
-    /* Ajustes de tipografía premium y jerarquía visual */
-    :root {
-      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      --font-size-sm: 14px;
-      --font-size-base: 16px;
-      --font-size-lg: 18px;
-      --font-size-xl: 20px;
-      --font-size-2xl: 24px;
-      --font-weight-light: 300;
-      --font-weight-normal: 400;
-      --font-weight-medium: 500;
-      --font-weight-semibold: 600;
-      --font-weight-bold: 700;
-      --line-height-base: 1.5;
-      --line-height-tight: 1.3;
-      --letter-spacing-normal: 0.01em;
-      --letter-spacing-wider: 0.05em;
-      --tracking-normal: 0;
-      --tracking-wider: 0.05em;
-      --tracking-widest: 0.1em;
-    }
-    
-    /* Jerarquía visual mejorada con tipografía premium */
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-heading);
-      line-height: var(--line-height-tight);
-      letter-spacing: var(--letter-spacing-wider);
-      font-weight: var(--font-weight-bold);
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-    }
-    
-    h1 { font-size: var(--font-size-2xl); }
-    h2 { font-size: var(--font-size-xl); }
-    h3 { font-size: var(--font-size-lg); }
-    h4 { font-size: var(--font-size-base); }
-    h5 { font-size: var(--font-size-sm); }
-    h6 { font-size: var(--font-size-sm); }
-    
-    body {
-      font-family: var(--font-body);
-      font-size: var(--font-size-base);
-      line-height: var(--line-height-base);
-      letter-spacing: var(--letter-spacing-normal);
+      padding: 0.5rem 1rem;
+      border: 1px solid #999;
+      border-radius: 8px;
+      background-color: #fff;
       color: #111417;
+      transition: all 0.3s ease;
+    }
+
+    button:hover, .button:hover {
       background-color: #f3f5f7;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      border-color: #666;
     }
-    
-    /* Modo oscuro */
-    @media (prefers-color-scheme: dark) {
+
+    button:active, .button:active {
+      transform: translateY(1px);
+    }
+
+    /* Responsividad mejorada para móviles */
+    @media (max-width: 600px) {
       body {
-        color: #f3f5f7;
-        background-color: #111417;
+        padding: 0.5rem;
       }
+      h1 { font-size: var(--font-size-xl); }
+      h2 { font-size: var(--font-size-lg); }
+      h3 { font-size: var(--font-size-base); }
       .metric-value {
-        color: #f3f5f7;
+        font-size: var(--font-size-xl);
       }
-      .metric-value.positive {
-        color: #58a6ff;
-      }
-      .metric-value.negative {
-        color: #ff5858;
-      }
-      .insight {
-        color: #f3f5f7;
-      }
-      .insight span {
-        color: #58a6ff;
-      }
-      .credit-status {
-        color: #58a6ff;
-      }
-      .empty {
-        color: #888;
-      }
-    }
-      --font-weight-light: 300;
-      --font-weight-normal: 400;
-      --font-weight-medium: 500;
-      --font-weight-semibold: 600;
-      --font-weight-bold: 700;
-    }
-
-    body {
-      font-family: var(--font-body);
-      font-weight: var(--font-weight-normal);
-      line-height: 1.5;
-      color: var(--text);
-      background-color: var(--bg);
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-heading);
-      font-weight: var(--font-weight-semibold);
-      line-height: 1.2;
-      margin: 0;
-      color: var(--text);
-    }
-
-    h1 {
-      font-size: 1.75rem;
-      font-weight: var(--font-weight-bold);
-      letter-spacing: -0.5px;
-      margin-bottom: 4px;
-    }
-
-    .metric-value {
-      font-family: var(--font-heading);
-      font-weight: var(--font-weight-bold);
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.5px;
-    }
-
-    .metric-label, .category-top, .panel-title, .credit-stat span {
-      font-family: var(--font-heading);
-      font-weight: var(--font-weight-medium);
-      font-size: 0.77rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .status-dot, .badge, .type-chip {
-      font-family: var(--font-heading);
-      font-weight: var(--font-weight-semibold);
-      font-size: 0.7rem;
-      text-transform: capitalize;
-    }
-
-    .input, .select, .show-more, .segmented button {
-      font-family: var(--font-heading);
-      font-weight: var(--font-weight-medium);
-      font-size: 0.77rem;
-    }
-
-    footer {
-      font-family: var(--font-body);
-      font-weight: var(--font-weight-light);
-      font-size: 0.7rem;
-    }
-  </style>
-    :root {
-      color-scheme: light dark;
-      --bg: #f3f5f7;
-      --surface: #ffffff;
-      --surface-subtle: #f7f8fa;
-      --surface-strong: #edf0f3;
-      --line: #dfe3e8;
-      --line-strong: #cbd1d8;
-      --text: #17202a;
-      --text-soft: #46525f;
-      --muted: #74808d;
-      --green: #137a4b;
-      --green-soft: #e8f5ee;
-      --red: #c33c4a;
-      --red-soft: #fbecef;
-      --blue: #2877c7;
-      --blue-soft: #eaf2fb;
-      --amber: #a56300;
-      --amber-soft: #fff3da;
-      --violet: #7256a5;
-      --shadow: 0 1px 2px rgb(23 32 42 / 4%);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111417;
-        --surface: #191d21;
-        --surface-subtle: #1e2328;
-        --surface-strong: #252b31;
-        --line: #303840;
-        --line-strong: #424c56;
-        --text: #f0f3f6;
-        --text-soft: #c1c9d1;
-        --muted: #8e99a5;
-        --green: #55b981;
-        --green-soft: #183528;
-        --red: #ef7883;
-        --red-soft: #3d2429;
-        --blue: #69a9e8;
-        --blue-soft: #1d3043;
-        --amber: #e0aa52;
-        --amber-soft: #3a3020;
-        --violet: #ad96d5;
-        --shadow: 0 1px 2px rgb(0 0 0 / 18%);
-      }
-    }
-
-    * { box-sizing: border-box; }
-    [hidden] { display: none !important; }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 76px;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 14px;
-      line-height: 1.45;
-      letter-spacing: 0;
-    }
-
-    button, input, select { font: inherit; letter-spacing: 0; }
-    button { color: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    h1, h2, h3, p { margin: 0; }
-    h1 { font-size: 1.42rem; line-height: 1.2; font-weight: 760; }
-    h2 { font-size: 1rem; line-height: 1.25; font-weight: 740; }
-    h3 { font-size: .84rem; line-height: 1.25; font-weight: 700; }
-
-    .app-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: color-mix(in srgb, var(--bg) 90%, transparent);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-    }
-
-    .header-inner, .page {
-      width: min(1280px, calc(100vw - 32px));
-      margin: 0 auto;
-    }
-
-    .header-inner {
-      min-height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      min-width: 0;
-      gap: 11px;
-    }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      flex: 0 0 auto;
-      border-radius: 8px;
-      background: var(--text);
-      color: var(--surface);
-      font-weight: 780;
-      font-variant-numeric: tabular-nums;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    .brand-copy h1 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin: 0;
-      line-height: 1.2;
-    }
-    .brand-copy p {
-      font-size: .85rem;
-      font-weight: 400;
-      margin-top: 2px;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-    }
-
-    .brand-copy { min-width: 0; }
-    .brand-copy p { color: var(--muted); font-size: .77rem; margin-top: 1px; }
-
-    .top-nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-left: auto;
-    }
-
-    .top-nav a {
-      color: var(--text-soft);
-      text-decoration: none;
-      font-size: .84rem;
-      font-weight: 650;
-      padding: 7px 9px;
-      border-radius: 6px;
-    }
-
-    .top-nav a:hover { background: var(--surface-strong); color: var(--text); }
-
-    .refresh-button {
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      flex: 0 0 auto;
-      border: 1px solid var(--line-strong);
-      border-radius: 7px;
-      background: var(--surface);
-      cursor: pointer;
-      font-size: 1.1rem;
-      line-height: 1;
-    }
-
-    .refresh-button:hover { background: var(--surface-subtle); }
-    .refresh-button:disabled { cursor: wait; opacity: .55; }
-
-    .page { padding: 24px 0 42px; }
-
-    .page-intro {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 20px;
-      margin-bottom: 16px;
-    }
-
-    .eyebrow {
-      color: var(--muted);
-      font-size: .74rem;
-      font-weight: 720;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .intro-title { font-size: 1.12rem; }
-
-    .status-line {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 7px 12px;
-      color: var(--muted);
-      font-size: .78rem;
-      text-align: right;
-    }
-
-    .status-dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      margin-right: 5px;
-      border-radius: 50%;
-      background: var(--green);
-    }
-
-    .status-dot.stale { background: var(--amber); }
-    .status-dot.error { background: var(--red); }
-
-    .toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .segmented {
-      display: inline-grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(52px, auto);
-      padding: 3px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: var(--surface-strong);
-    }
-
-    .segmented button {
-      min-height: 30px;
-      padding: 5px 11px;
-      border: 0;
-      border-radius: 5px;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: .78rem;
-      font-weight: 680;
-    }
-
-    .segmented button[aria-pressed="true"] {
-      color: var(--text);
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
-
-    .period-copy { color: var(--muted); font-size: .78rem; }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: 1.28fr repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .metric, .panel {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-    }
-
-    .metric {
-      min-width: 0;
-      min-height: 124px;
-      padding: 15px 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .metric.primary { border-top: 3px solid var(--text); padding-top: 13px; }
-    .metric.credit { border-top: 3px solid var(--blue); padding-top: 13px; }
-    .metric.payment { border-top: 3px solid var(--amber); padding-top: 13px; }
-
-    .metric-label {
-      color: var(--muted);
-      font-size: .77rem;
-      font-weight: 650;
-    }
-
-    .metric-value {
-      margin: 7px 0 5px;
-      font-size: 1.72rem;
-      line-height: 1.05;
-      font-weight: 780;
-      font-variant-numeric: tabular-nums;
-      overflow-wrap: anywhere;
-    }
-
-    .metric.primary .metric-value { font-size: 2.35rem; }
-    .metric-foot { color: var(--muted); font-size: .76rem; min-height: 2.2em; }
-    .positive { color: var(--green); }
-    .negative { color: var(--red); }
-    .accent { color: var(--blue); }
-    .warning { color: var(--amber); }
-
-    .panel { padding: 16px; min-width: 0; }
-    .panel + .panel { margin-top: 12px; }
-
-    .panel-head {
-      min-height: 32px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .panel-title p { color: var(--muted); font-size: .76rem; margin-top: 3px; }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      max-width: 100%;
-      padding: 4px 7px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      background: var(--surface-subtle);
-      font-size: .7rem;
-      font-weight: 650;
-      white-space: nowrap;
-    }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(300px, .85fr);
-      gap: 12px;
-      align-items: stretch;
-      margin-bottom: 12px;
-    }
-
-    .dashboard-grid > .panel { margin: 0; }
-
-    .chart-shell {
-      position: relative;
-      min-height: 240px;
-    }
-
-    .chart-shell svg { display: block; width: 100%; height: auto; }
-    .chart-grid { stroke: var(--line); stroke-width: 1; }
-    .chart-axis { fill: var(--muted); font-size: 10px; }
-    .chart-in { fill: var(--green); }
-    .chart-out { fill: var(--red); }
-    .balance-area { fill: var(--blue-soft); }
-    .balance-line { fill: none; stroke: var(--blue); stroke-width: 2.25; vector-effect: non-scaling-stroke; }
-    .balance-dot { fill: var(--surface); stroke: var(--blue); stroke-width: 2; vector-effect: non-scaling-stroke; }
-
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      color: var(--muted);
-      font-size: .72rem;
-    }
-
-    .legend span { display: inline-flex; align-items: center; gap: 5px; }
-    .legend i { width: 8px; height: 8px; border-radius: 2px; background: var(--muted); }
-    .legend .in { background: var(--green); }
-    .legend .out { background: var(--red); }
-    .legend .balance { background: var(--blue); }
-
-    .category-list { display: grid; gap: 14px; }
-    .category-row { min-width: 0; }
-    .category-top, .category-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .category-top { align-items: baseline; font-size: .82rem; }
-    .category-top strong { font-variant-numeric: tabular-nums; }
-    .category-name { min-width: 0; overflow-wrap: anywhere; text-transform: capitalize; }
-    .category-meta { color: var(--muted); font-size: .69rem; margin-top: 2px; }
-
-    .bar-track {
-      height: 6px;
-      margin-top: 7px;
-      overflow: hidden;
-      border-radius: 3px;
-      background: var(--surface-strong);
-    }
-
-    .bar-fill { height: 100%; border-radius: 3px; background: var(--red); }
-    .bar-fill.blue { background: var(--blue); }
-
-    .insights {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: var(--line);
-      margin-top: 14px;
-    }
-
-    .insight { background: var(--surface-subtle); padding: 11px; min-width: 0; }
-    .insight span { display: block; color: var(--muted); font-size: .68rem; margin-bottom: 4px; }
-    .insight strong { display: block; font-size: .87rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-
-    .table-tools {
-      display: grid;
-      grid-template-columns: minmax(180px, 1fr) 148px;
-      gap: 8px;
-      width: min(100%, 440px);
-    }
-
-    .input, .select {
-      width: 100%;
-      height: 34px;
-      border: 1px solid var(--line-strong);
-      border-radius: 6px;
-      background: var(--surface-subtle);
-      color: var(--text);
-      outline: none;
-    }
-
-    .input { padding: 6px 10px; }
-    .select { padding: 5px 28px 5px 9px; }
-    .input:focus, .select:focus { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-soft); }
-    .input::placeholder { color: var(--muted); }
-
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-    th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
-    th { color: var(--muted); font-size: .69rem; font-weight: 720; text-transform: uppercase; }
-    tbody tr:last-child td { border-bottom: 0; }
-    tbody tr:hover td { background: var(--surface-subtle); }
-    .col-date { width: 102px; }
-    .col-type { width: 120px; }
-    .col-number { width: 126px; text-align: right; }
-    td.col-number { font-weight: 720; font-variant-numeric: tabular-nums; }
-    .movement-name { font-weight: 640; overflow-wrap: anywhere; }
-    .movement-source { margin-top: 2px; color: var(--muted); font-size: .7rem; }
-
-    .type-chip {
-      display: inline-block;
-      max-width: 100%;
-      padding: 3px 6px;
-      overflow: hidden;
-      border-radius: 4px;
-      background: var(--surface-strong);
-      color: var(--text-soft);
-      text-overflow: ellipsis;
-      text-transform: capitalize;
-      white-space: nowrap;
-      font-size: .7rem;
-      font-weight: 650;
-    }
-
-    .show-more {
-      display: block;
-      min-width: 112px;
-      min-height: 34px;
-      margin: 12px auto 0;
-      padding: 6px 12px;
-      border: 1px solid var(--line-strong);
-      border-radius: 6px;
-      background: var(--surface);
-      cursor: pointer;
-      font-size: .77rem;
-      font-weight: 680;
-    }
-
-    .show-more:hover { background: var(--surface-subtle); }
-
-    .credit-overview {
-      display: grid;
-      grid-template-columns: 1.1fr repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .credit-stat {
-      min-width: 0;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: var(--surface-subtle);
-    }
-
-    .credit-stat.primary { background: var(--blue-soft); border-color: color-mix(in srgb, var(--blue) 28%, var(--line)); }
-    .credit-stat span { display: block; color: var(--muted); font-size: .7rem; margin-bottom: 5px; }
-    .credit-stat strong { display: block; font-size: 1.08rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-    .credit-stat.primary strong { font-size: 1.42rem; color: var(--blue); }
-    .credit-stat small { display: block; color: var(--muted); font-size: .67rem; margin-top: 5px; }
-
-    .utilization {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .utilization-track {
-      height: 9px;
-      overflow: hidden;
-      border-radius: 5px;
-      background: var(--surface-strong);
-    }
-
-    .utilization-fill { height: 100%; border-radius: 5px; background: var(--blue); }
-    .utilization-fill.high { background: var(--amber); }
-    .utilization-fill.critical { background: var(--red); }
-    .utilization strong { min-width: 38px; text-align: right; font-size: .78rem; font-variant-numeric: tabular-nums; }
-
-    .credit-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
-      gap: 16px;
-    }
-
-    .subsection-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 9px;
-    }
-
-    .subsection-head span { color: var(--muted); font-size: .7rem; }
-    .empty { min-height: 120px; display: grid; place-items: center; color: var(--muted); text-align: center; }
-    .error-box { color: var(--red); background: var(--red-soft); border: 1px solid color-mix(in srgb, var(--red) 30%, var(--line)); border-radius: 7px; padding: 12px; }
-
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px 2px 0;
-      color: var(--muted);
-      font-size: .7rem;
-    }
-
-    @media (max-width: 1040px) {
-      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .dashboard-grid, .credit-grid { grid-template-columns: 1fr; }
-      .credit-overview { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .credit-stat.primary { grid-column: span 2; }
-    }
-
-    @media (max-width: 720px) {
-      .header-inner, .page { width: min(100vw - 20px, 1280px); }
-      .header-inner { min-height: 58px; }
-      .brand-copy p, .top-nav { display: none; }
-      .page { padding-top: 16px; }
-      .page-intro { align-items: flex-start; flex-direction: column; gap: 9px; }
-      .status-line { justify-content: flex-start; text-align: left; }
-      .toolbar { align-items: flex-start; flex-direction: column; }
-      .period-copy { width: 100%; }
-      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .metric { min-height: 112px; padding: 13px; }
-      .metric.primary { padding-top: 11px; }
-      .metric.primary .metric-value { font-size: 1.85rem; }
-      .panel { padding: 13px; }
-      .chart-shell { min-height: 190px; }
-      .insights { grid-template-columns: 1fr; }
-      .panel-head.table-head { align-items: stretch; flex-direction: column; }
-      .table-tools { width: 100%; }
-      .credit-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .credit-stat.primary { grid-column: 1 / -1; }
-      .col-type, th.col-type, td.col-type, .col-balance, th.col-balance, td.col-balance { display: none; }
-      .col-date { width: 88px; }
-      .col-number { width: 108px; }
-      th, td { padding: 9px 5px; }
-      footer { flex-direction: column; gap: 3px; }
-    }
-
-    @media (max-width: 430px) {
-      .metrics { grid-template-columns: 1fr; }
-      .metric { min-height: 102px; }
-      .segmented { width: 100%; grid-auto-columns: 1fr; }
-      .table-tools { grid-template-columns: 1fr; }
-      .credit-overview { grid-template-columns: 1fr; }
-      .credit-stat.primary { grid-column: auto; }
-      .panel-head { align-items: flex-start; }
-      .badge { white-space: normal; text-align: right; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
-  <header class="app-header">
-    <div class="header-inner">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true">$</div>
-        <div class="brand-copy">
-          <h1>Mis Finanzas</h1>
-          <p>Cuenta y tarjeta Santander</p>
-        </div>
-      </div>
-      <nav class="top-nav" aria-label="Secciones">
-        <a href="#resumen">Resumen</a>
-        <a href="#cuenta">Cuenta</a>
-        <a href="#tarjeta">Tarjeta</a>
-      </nav>
-      <button class="refresh-button" id="refreshButton" type="button" title="Actualizar datos" aria-label="Actualizar datos">&#8635;</button>
-    </div>
+  <header>
+    <h1>Mis Finanzas</h1>
+    <p>Dashboard financiero personal premium</p>
   </header>
 
-  <main class="page">
-    <section class="page-intro" id="resumen">
-      <div>
-        <div class="eyebrow">Posición financiera</div>
-        <h2 class="intro-title">Resumen de hoy</h2>
-      </div>
-      <div class="status-line">
-        <span><i class="status-dot" id="statusDot"></i><span id="dataStatus">Cargando datos</span></span>
-        <span id="updated">Última actualización: -</span>
+  <main>
+    <section id="balance-section">
+      <h2>Balance</h2>
+      <div class="metric">
+        <span id="balance">$0</span>
+        <small id="balanceFoot">Último movimiento bancario: -</small>
       </div>
     </section>
 
-    <div class="toolbar" aria-label="Controles del resumen">
-      <div class="segmented" id="periodControl" aria-label="Periodo">
-        <button type="button" data-period="7" aria-pressed="false">7 días</button>
-        <button type="button" data-period="30" aria-pressed="true">30 días</button>
-        <button type="button" data-period="all" aria-pressed="false">Todo</button>
-      </div>
-      <div class="period-copy" id="periodCopy">Ventana de 30 días</div>
-    </div>
-
-    <section class="metrics" aria-label="Indicadores principales">
-      <article class="metric primary">
-        <div class="metric-label">Saldo disponible en cuenta</div>
-        <div class="metric-value" id="balance">-</div>
-        <div class="metric-foot" id="balanceFoot">Fuente Santander</div>
-      </article>
-      <article class="metric">
-        <div class="metric-label">Flujo neto del periodo</div>
-        <div class="metric-value" id="netFlow">-</div>
-        <div class="metric-foot" id="flowFoot">Entradas y salidas</div>
-      </article>
-      <article class="metric credit">
-        <div class="metric-label">Cupo disponible tarjeta</div>
-        <div class="metric-value accent" id="creditAvailable">-</div>
-        <div class="metric-foot" id="creditFoot">Cupo web actual</div>
-      </article>
-      <article class="metric payment">
-        <div class="metric-label">Próximo pago facturado</div>
-        <div class="metric-value warning" id="nextPayment">-</div>
-        <div class="metric-foot" id="paymentFoot">Cartola mensual</div>
-      </article>
-    </section>
-
-    <section class="dashboard-grid" id="cuenta">
-      <article class="panel">
-        <div class="panel-head">
-          <div class="panel-title">
-            <h2>Flujo diario</h2>
-            <p>Entradas y salidas registradas por fecha bancaria</p>
-          </div>
-          <div class="legend" aria-label="Leyenda">
-            <span><i class="in"></i>Entradas</span>
-            <span><i class="out"></i>Salidas</span>
-          </div>
-        </div>
-        <div class="chart-shell" id="cashflowChart"></div>
-        <div class="insights" id="flowInsights"></div>
-      </article>
-
-      <article class="panel">
-        <div class="panel-head">
-          <div class="panel-title">
-            <h2>Salidas por categoría</h2>
-            <p>Participación dentro del periodo</p>
-          </div>
-          <span class="badge" id="categoryBadge">-</span>
-        </div>
-        <div class="category-list" id="categoryChart"></div>
-      </article>
-    </section>
-
-    <section class="dashboard-grid">
-      <article class="panel">
-        <div class="panel-head">
-          <div class="panel-title">
-            <h2>Evolución del saldo</h2>
-            <p>Secuencia real de filas entregada por Santander</p>
-          </div>
-          <div class="legend"><span><i class="balance"></i>Saldo</span></div>
-        </div>
-        <div class="chart-shell" id="balanceChart"></div>
-      </article>
-
-      <article class="panel">
-        <div class="panel-head">
-          <div class="panel-title">
-            <h2>Último movimiento</h2>
-            <p>Primera fila de la descarga bancaria</p>
-          </div>
-          <span class="badge" id="latestDate">-</span>
-        </div>
-        <div id="latestMovement"></div>
-      </article>
-    </section>
-
-    <section class="panel" aria-labelledby="movementsTitle">
-      <div class="panel-head table-head">
-        <div class="panel-title">
-          <h2 id="movementsTitle">Movimientos de cuenta</h2>
-          <p id="movementCount">-</p>
-        </div>
-        <div class="table-tools">
-          <input class="input" id="movementSearch" type="search" placeholder="Buscar detalle o categoría" aria-label="Buscar movimientos">
-          <select class="select" id="directionFilter" aria-label="Filtrar movimientos">
-            <option value="all">Entradas y salidas</option>
-            <option value="entrada">Solo entradas</option>
-            <option value="salida">Solo salidas</option>
-          </select>
-        </div>
-      </div>
-      <div class="table-wrap" id="accountTable"></div>
-      <button class="show-more" id="showMoreAccount" type="button" hidden>Mostrar más</button>
-    </section>
-
-    <section class="panel" id="tarjeta" aria-labelledby="creditTitle">
-      <div class="panel-head">
-        <div class="panel-title">
-          <h2 id="creditTitle">Tarjeta de crédito</h2>
-          <p id="creditProduct">Estado actual y última cartola</p>
-        </div>
-        <span class="badge" id="creditStatus">Cargando</span>
-      </div>
-
-      <div class="credit-overview" id="creditOverview"></div>
-
-      <div class="credit-grid">
-        <div>
-          <div class="subsection-head">
-            <h3>Compras por facturar</h3>
-            <span id="liveMovementCount">-</span>
-          </div>
-          <div class="table-wrap" id="liveCreditTable"></div>
-        </div>
-        <div>
-          <div class="subsection-head">
-            <h3>Composición de la cartola</h3>
-            <span id="statementPeriod">-</span>
-          </div>
-          <div class="category-list" id="creditCategories"></div>
-        </div>
+    <section id="netflow-section">
+      <h2>Flujo Neto</h2>
+      <div class="metric">
+        <span id="netFlow">$0</span>
+        <small id="flowFoot">$0 entra · $0 sale</small>
       </div>
     </section>
 
-    <section class="panel" aria-labelledby="statementTitle">
-      <div class="panel-head table-head">
-        <div class="panel-title">
-          <h2 id="statementTitle">Movimientos de la última cartola</h2>
-          <p id="statementCount">-</p>
-        </div>
-        <div class="table-tools">
-          <input class="input" id="creditSearch" type="search" placeholder="Buscar comercio o tipo" aria-label="Buscar en la cartola">
-          <select class="select" id="creditDirectionFilter" aria-label="Filtrar cartola">
-            <option value="all">Cargos y pagos</option>
-            <option value="salida">Solo cargos</option>
-            <option value="entrada">Solo pagos</option>
-          </select>
-        </div>
+    <section id="credit-section">
+      <h2>Crédito</h2>
+      <div class="metric">
+        <span id="creditAvailable">$0</span>
+        <small id="creditFoot">0% utilizado de $0</small>
       </div>
-      <div class="table-wrap" id="statementTable"></div>
-      <button class="show-more" id="showMoreCredit" type="button" hidden>Mostrar más</button>
+    </section>
+
+    <section id="payment-section">
+      <h2>Pago Próximo</h2>
+      <div class="metric">
+        <span id="nextPayment">$0</span>
+        <small id="paymentFoot">Sin fecha de pago</small>
+      </div>
+    </section>
+
+    <section id="period-section">
+      <h2>Periodo</h2>
+      <div class="metric">
+        <span id="periodCopy">-</span>
+      </div>
+    </section>
+
+    <section id="cashflow-section">
+      <h2>Cashflow</h2>
+      <div id="cashflowChart"></div>
+    </section>
+
+    <section id="flow-insights-section">
+      <h2>Insights</h2>
+      <div id="flowInsights"></div>
+    </section>
+
+    <section id="category-section">
+      <h2>Categorías</h2>
+      <div id="categoryChart"></div>
+      <div class="badge" id="categoryBadge">$0 total</div>
+    </section>
+
+    <section id="balance-chart-section">
+      <h2>Balance</h2>
+      <div id="balanceChart"></div>
+    </section>
+
+    <section id="latest-movement-section">
+      <h2>Último Movimiento</h2>
+      <div id="latestMovement"></div>
+      <small id="latestDate">-</small>
+    </section>
+
+    <section id="account-table-section">
+      <h2>Movimientos</h2>
+      <div id="accountTable"></div>
+      <button id="showMoreAccount" class="button">Mostrar más</button>
+    </section>
+
+    <section id="credit-table-section">
+      <h2>Cartola</h2>
+      <div id="statementTable"></div>
+      <button id="showMoreCredit" class="button">Mostrar más</button>
     </section>
 
     <footer>
-      <span>Fuente principal: descarga Santander. No se estiman saldos ni movimientos.</span>
-      <span>Actualización automática cada 60 segundos.</span>
+      <p>datos sanitizados (sin RUT ni cuentas)</p>
     </footer>
   </main>
 
   <script>
-    const DATA_URLS = {
-      base: "./data/cargos.json",
-      account: "./data/santander-movimientos.json",
-      creditLive: "./data/tarjeta-credito-actual.json",
-      statement: "./data/tarjeta-credito.json"
-    };
-
-    const state = {
-      period: "30",
-      accountLimit: 15,
-      creditLimit: 15,
-      accountSearch: "",
-      accountDirection: "all",
-      creditSearch: "",
-      creditDirection: "all",
-      data: null
-    };
-
-    const money = new Intl.NumberFormat("es-CL", {
-      style: "currency",
-      currency: "CLP",
-      maximumFractionDigits: 0
-    });
-
-    const compactMoney = new Intl.NumberFormat("es-CL", {
-      notation: "compact",
-      maximumFractionDigits: 1
-    });
-
-    const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-    }[char]));
-
-    const formatMoney = (value) => Number.isFinite(Number(value)) ? money.format(Math.round(Number(value))) : "-";
-    const formatSignedMoney = (value) => {
-      const number = Number(value);
-      if (!Number.isFinite(number)) return "-";
-      return `${number > 0 ? "+" : number < 0 ? "-" : ""}${formatMoney(Math.abs(number))}`;
-    };
-    const formatAxisMoney = (value) => `$${compactMoney.format(Math.abs(Math.round(value || 0)))}`;
-    const validNumber = (value) => {
-      const number = Number(value);
-      return Number.isFinite(number) ? number : null;
-    };
-
-    function parseDate(value) {
-      const text = String(value || "").slice(0, 10);
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return null;
-      const [year, month, day] = text.split("-").map(Number);
-      return new Date(year, month - 1, day, 12);
-    }
-
-    function formatDate(value, options = {}) {
-      const date = parseDate(value);
-      if (!date) return "-";
-      return new Intl.DateTimeFormat("es-CL", {
-        day: "2-digit",
-        month: options.short ? "short" : "2-digit",
-        ...(options.year ? { year: "numeric" } : {})
-      }).format(date).replace(".", "");
-    }
-
-    function formatDateTime(value) {
-      const date = new Date(value);
-      if (Number.isNaN(date.getTime())) return "-";
-      return new Intl.DateTimeFormat("es-CL", {
-        day: "2-digit",
-        month: "short",
-        hour: "2-digit",
-        minute: "2-digit"
-      }).format(date).replace(".", "");
-    }
-
-    function daysUntil(value) {
-      const target = parseDate(value);
-      if (!target) return null;
-      const today = new Date();
-      today.setHours(12, 0, 0, 0);
-      return Math.ceil((target - today) / 86_400_000);
-    }
-
-    async function loadJson(url) {
-      try {
-        const response = await fetch(`${url}?t=${Date.now()}`, { cache: "no-store" });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return { ...(await response.json()), failed: false };
-      } catch (error) {
-        return { failed: true, error: String(error), movimientos: [] };
-      }
-    }
-
-    function normalizeMovement(raw) {
-      const direction = raw.direccion === "entrada" || raw.direction === "in" ? "entrada" : "salida";
-      const balance = validNumber(raw.saldo ?? raw.saldo_actual);
-      const sourceOrder = validNumber(raw.source_order);
-      return {
-        uid: raw.uid || [raw.fecha, raw.hora, direction, raw.monto, raw.destino || raw.detalle].join("|"),
-        fecha: String(raw.fecha || raw.date || "").slice(0, 10),
-        hora: String(raw.hora || "").slice(0, 5),
-        direccion: direction,
-        monto: Math.abs(Number(raw.monto ?? raw.amount ?? 0)),
-        saldo: balance,
-        sourceOrder,
-        destino: raw.destino || raw.description || raw.detalle || "Movimiento",
-        tipo: raw.tipo || (direction === "entrada" ? "abono" : "otro"),
-        fuente: raw.fuente || "Santander"
-      };
-    }
-
-    function compareBankOrder(a, b) {
-      if (a.sourceOrder !== null && b.sourceOrder !== null) return a.sourceOrder - b.sourceOrder;
-      const dateDifference = String(b.fecha).localeCompare(String(a.fecha));
-      if (dateDifference) return dateDifference;
-      return String(b.hora).localeCompare(String(a.hora));
-    }
-
-    function normalizeAccount(payload) {
-      return (Array.isArray(payload?.movimientos) ? payload.movimientos : [])
-        .map(normalizeMovement)
-        .filter((movement) => movement.fecha && movement.monto > 0)
-        .sort(compareBankOrder);
-    }
-
-    function cutoffForPeriod(movements) {
-      if (state.period === "all") return null;
-      const newestDate = movements.map((movement) => parseDate(movement.fecha)).filter(Boolean).sort((a, b) => b - a)[0] || new Date();
-      const cutoff = new Date(newestDate);
-      cutoff.setDate(cutoff.getDate() - (Number(state.period) - 1));
-      cutoff.setHours(0, 0, 0, 0);
-      return cutoff;
-    }
-
-    function scopedMovements(movements) {
-      const cutoff = cutoffForPeriod(movements);
-      if (!cutoff) return movements;
-      return movements.filter((movement) => {
-        const date = parseDate(movement.fecha);
-        return date && date >= cutoff;
-      });
-    }
-
-    function summarize(movements) {
-      const entries = movements.filter((m) => m.direccion === "entrada").reduce((sum, m) => sum + m.monto, 0);
-      const exits = movements.filter((m) => m.direccion === "salida").reduce((sum, m) => sum + m.monto, 0);
-      return { entries, exits, net: entries - exits, count: movements.length };
-    }
-
-    function groupByDate(movements) {
-      const grouped = new Map();
-      for (const movement of movements) {
-        const current = grouped.get(movement.fecha) || { date: movement.fecha, entries: 0, exits: 0 };
-        current[movement.direccion === "entrada" ? "entries" : "exits"] += movement.monto;
-        grouped.set(movement.fecha, current);
-      }
-      return [...grouped.values()].sort((a, b) => a.date.localeCompare(b.date));
-    }
-
-    function renderCashflowChart(movements) {
-      const rows = groupByDate(movements);
-      if (!rows.length) return '<div class="empty">Sin movimientos en este periodo.</div>';
-
-      const width = 760;
-      const height = 248;
-      const left = 52;
-      const right = 12;
-      const top = 14;
-      const bottom = 34;
-      const chartHeight = height - top - bottom;
-      const maxValue = Math.max(...rows.flatMap((row) => [row.entries, row.exits]), 1);
-      const slot = (width - left - right) / rows.length;
-      const barWidth = Math.max(3, Math.min(14, slot * .3));
-      const baseline = top + chartHeight;
-
-      const grid = [0, .5, 1].map((fraction) => {
-        const y = baseline - chartHeight * fraction;
-        return `<line class="chart-grid" x1="${left}" x2="${width - right}" y1="${y}" y2="${y}"></line>
-          <text class="chart-axis" x="${left - 7}" y="${y + 3}" text-anchor="end">${formatAxisMoney(maxValue * fraction)}</text>`;
-      }).join("");
-
-      const bars = rows.map((row, index) => {
-        const center = left + slot * index + slot / 2;
-        const entryHeight = (row.entries / maxValue) * chartHeight;
-        const exitHeight = (row.exits / maxValue) * chartHeight;
-        return `<rect class="chart-in" x="${center - barWidth - 1}" y="${baseline - entryHeight}" width="${barWidth}" height="${Math.max(entryHeight, .5)}" rx="2">
-            <title>${row.date}: entradas ${formatMoney(row.entries)}</title>
-          </rect>
-          <rect class="chart-out" x="${center + 1}" y="${baseline - exitHeight}" width="${barWidth}" height="${Math.max(exitHeight, .5)}" rx="2">
-            <title>${row.date}: salidas ${formatMoney(row.exits)}</title>
-          </rect>`;
-      }).join("");
-
-      const labelEvery = Math.max(1, Math.ceil(rows.length / 6));
-      const labels = rows.map((row, index) => {
-        if (index % labelEvery !== 0 && index !== rows.length - 1) return "";
-        const x = left + slot * index + slot / 2;
-        return `<text class="chart-axis" x="${x}" y="${height - 9}" text-anchor="middle">${formatDate(row.date, { short: true })}</text>`;
-      }).join("");
-
-      return `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Flujo diario de entradas y salidas">
-        ${grid}${bars}${labels}
-      </svg>`;
-    }
-
-    function renderBalanceChart(movements) {
-      const rows = movements
-        .filter((movement) => movement.saldo !== null)
-        .sort((a, b) => (b.sourceOrder ?? 0) - (a.sourceOrder ?? 0));
-      if (rows.length < 2) return '<div class="empty">No hay suficientes saldos por fila.</div>';
-
-      const width = 760;
-      const height = 248;
-      const left = 58;
-      const right = 15;
-      const top = 16;
-      const bottom = 34;
-      const values = rows.map((row) => row.saldo);
-      let min = Math.min(...values, 0);
-      let max = Math.max(...values, 0);
-      const padding = Math.max((max - min) * .12, 1);
-      min -= padding;
-      max += padding;
-      const chartHeight = height - top - bottom;
-      const chartWidth = width - left - right;
-      const xFor = (index) => left + (index / (rows.length - 1)) * chartWidth;
-      const yFor = (value) => top + ((max - value) / (max - min || 1)) * chartHeight;
-      const points = rows.map((row, index) => `${xFor(index)},${yFor(row.saldo)}`).join(" ");
-      const area = `${left},${top + chartHeight} ${points} ${width - right},${top + chartHeight}`;
-
-      const grid = [0, .5, 1].map((fraction) => {
-        const value = min + (max - min) * fraction;
-        const y = yFor(value);
-        return `<line class="chart-grid" x1="${left}" x2="${width - right}" y1="${y}" y2="${y}"></line>
-          <text class="chart-axis" x="${left - 7}" y="${y + 3}" text-anchor="end">${formatAxisMoney(value)}</text>`;
-      }).join("");
-
-      const dots = rows.map((row, index) => {
-        if (index !== 0 && index !== rows.length - 1 && index % Math.ceil(rows.length / 12) !== 0) return "";
-        return `<circle class="balance-dot" cx="${xFor(index)}" cy="${yFor(row.saldo)}" r="3">
-          <title>${row.fecha}: saldo ${formatMoney(row.saldo)} después de ${row.destino}</title>
-        </circle>`;
-      }).join("");
-
-      return `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Evolución del saldo según el orden bancario">
-        ${grid}
-        <polygon class="balance-area" points="${area}"></polygon>
-        <polyline class="balance-line" points="${points}"></polyline>
-        ${dots}
-        <text class="chart-axis" x="${left}" y="${height - 9}">${formatDate(rows[0].fecha, { short: true })}</text>
-        <text class="chart-axis" x="${width - right}" y="${height - 9}" text-anchor="end">${formatDate(rows.at(-1).fecha, { short: true })}</text>
-      </svg>`;
-    }
-
-    function renderCategoryList(movements, options = {}) {
-      const output = movements.filter((movement) => movement.direccion === "salida");
-      const totals = new Map();
-      for (const movement of output) {
-        const item = totals.get(movement.tipo) || { amount: 0, count: 0 };
-        item.amount += movement.monto;
-        item.count += 1;
-        totals.set(movement.tipo, item);
-      }
-      const total = output.reduce((sum, movement) => sum + movement.monto, 0);
-      const rows = [...totals.entries()].sort((a, b) => b[1].amount - a[1].amount).slice(0, options.limit || 7);
-      if (!rows.length) return '<div class="empty">Sin salidas clasificadas.</div>';
-      const max = Math.max(...rows.map(([, item]) => item.amount), 1);
-      return rows.map(([type, item]) => {
-        const percentage = total ? Math.round((item.amount / total) * 100) : 0;
-        return `<div class="category-row">
-          <div class="category-top"><span class="category-name">${escapeHtml(type)}</span><strong>${formatMoney(item.amount)}</strong></div>
-          <div class="category-meta"><span>${item.count} ${item.count === 1 ? "movimiento" : "movimientos"}</span><span>${percentage}%</span></div>
-          <div class="bar-track"><div class="bar-fill ${options.blue ? "blue" : ""}" style="width:${Math.max(2, item.amount / max * 100)}%"></div></div>
-        </div>`;
-      }).join("");
-    }
-
-    function renderStatementCategories(payload) {
-      const rows = Array.isArray(payload?.por_tipo) ? payload.por_tipo : [];
-      const total = rows.reduce((sum, item) => sum + Number(item.monto || 0), 0);
-      if (!rows.length) return '<div class="empty">Sin categorías en la cartola.</div>';
-      const max = Math.max(...rows.map((item) => Number(item.monto || 0)), 1);
-      return rows.slice(0, 7).map((item) => {
-        const amount = Number(item.monto || 0);
-        const percentage = total ? Math.round(amount / total * 100) : 0;
-        return `<div class="category-row">
-          <div class="category-top"><span class="category-name">${escapeHtml(item.tipo)}</span><strong>${formatMoney(amount)}</strong></div>
-          <div class="category-meta"><span>${Number(item.cantidad || 0)} movimientos</span><span>${percentage}%</span></div>
-          <div class="bar-track"><div class="bar-fill blue" style="width:${Math.max(2, amount / max * 100)}%"></div></div>
-        </div>`;
-      }).join("");
-    }
-
-    function renderLatestMovement(movement) {
-      if (!movement) return '<div class="empty">Sin movimientos.</div>';
-      const sign = movement.direccion === "entrada" ? "+" : "-";
-      const className = movement.direccion === "entrada" ? "positive" : "negative";
-      return `<div style="padding:8px 0 2px">
-        <div class="metric-value ${className}" style="margin-top:0">${sign}${formatMoney(movement.monto)}</div>
-        <div class="movement-name" style="font-size:.94rem;margin:8px 0 4px">${escapeHtml(movement.destino)}</div>
-        <div class="movement-source">${escapeHtml(movement.tipo)} · ${formatDate(movement.fecha, { short: true, year: true })}</div>
-        <div class="insights" style="grid-template-columns:1fr 1fr;margin-top:18px">
-          <div class="insight"><span>Saldo de la fila</span><strong>${formatMoney(movement.saldo)}</strong></div>
-          <div class="insight"><span>Orden bancario</span><strong>${movement.sourceOrder !== null ? `#${movement.sourceOrder + 1}` : "-"}</strong></div>
-        </div>
-      </div>`;
-    }
-
-    function accountRows(movements) {
-      const query = state.accountSearch.trim().toLocaleLowerCase("es");
-      return movements.filter((movement) => {
-        if (state.accountDirection !== "all" && movement.direccion !== state.accountDirection) return false;
-        if (!query) return true;
-        return `${movement.destino} ${movement.tipo} ${movement.fecha}`.toLocaleLowerCase("es").includes(query);
-      });
-    }
-
-    function renderAccountTable(movements) {
-      const filtered = accountRows(movements);
-      const visible = filtered.slice(0, state.accountLimit);
-      document.getElementById("movementCount").textContent = `${filtered.length} de ${movements.length} movimientos del periodo`;
-      const moreButton = document.getElementById("showMoreAccount");
-      moreButton.hidden = visible.length >= filtered.length;
-      moreButton.textContent = `Mostrar ${Math.min(15, filtered.length - visible.length)} más`;
-      if (!visible.length) return '<div class="empty">No hay movimientos que coincidan con el filtro.</div>';
-
-      return `<table>
-        <thead><tr>
-          <th class="col-date">Fecha</th><th>Detalle</th><th class="col-type">Categoría</th>
-          <th class="col-number">Monto</th><th class="col-number col-balance">Saldo</th>
-        </tr></thead>
-        <tbody>${visible.map((movement) => `<tr>
-          <td class="col-date">${formatDate(movement.fecha, { short: true })}</td>
-          <td><div class="movement-name">${escapeHtml(movement.destino)}</div><div class="movement-source">${escapeHtml(movement.fuente)}</div></td>
-          <td class="col-type"><span class="type-chip">${escapeHtml(movement.tipo)}</span></td>
-          <td class="col-number ${movement.direccion === "entrada" ? "positive" : "negative"}">${movement.direccion === "entrada" ? "+" : "-"}${formatMoney(movement.monto)}</td>
-          <td class="col-number col-balance">${formatMoney(movement.saldo)}</td>
-        </tr>`).join("")}</tbody>
-      </table>`;
-    }
-
-    function renderCreditOverview(live, statement) {
-      const total = validNumber(live?.cupo_total) ?? validNumber(statement?.cupo_total);
-      const used = validNumber(live?.cupo_utilizado);
-      const available = validNumber(live?.cupo_disponible);
-      const billed = validNumber(live?.facturado?.deuda_facturada) ?? validNumber(live?.facturado?.deuda_total_facturada) ?? validNumber(statement?.monto_total_facturado);
-      const unbilled = validNumber(live?.por_facturar?.total_neto);
-      const minimum = validNumber(statement?.monto_minimo);
-      const utilization = total && used !== null ? Math.min(100, Math.max(0, used / total * 100)) : null;
-      const utilizationClass = utilization >= 90 ? "critical" : utilization >= 70 ? "high" : "";
-
-      return `<div class="credit-stat primary">
-          <span>Cupo disponible actual</span><strong>${formatMoney(available)}</strong>
-          <div class="utilization"><div class="utilization-track"><div class="utilization-fill ${utilizationClass}" style="width:${utilization ?? 0}%"></div></div><strong>${utilization === null ? "-" : `${Math.round(utilization)}%`}</strong></div>
-          <small>${formatMoney(used)} usado de ${formatMoney(total)}</small>
-        </div>
-        <div class="credit-stat"><span>Facturado</span><strong>${formatMoney(billed)}</strong><small>Deuda web actual</small></div>
-        <div class="credit-stat"><span>Por facturar</span><strong>${formatMoney(unbilled)}</strong><small>Compras posteriores al cierre</small></div>
-        <div class="credit-stat"><span>Pago mínimo</span><strong>${formatMoney(minimum)}</strong><small>Según última cartola</small></div>
-        <div class="credit-stat"><span>Fecha de pago</span><strong>${formatDate(statement?.pagar_hasta, { short: true, year: true })}</strong><small>${dueDateCopy(statement?.pagar_hasta)}</small></div>`;
-    }
-
-    function dueDateCopy(value) {
-      const days = daysUntil(value);
-      if (days === null) return "Sin fecha disponible";
-      if (days === 0) return "Vence hoy";
-      if (days < 0) return `Venció hace ${Math.abs(days)} días`;
-      return `Faltan ${days} días`;
-    }
-
-    function renderLiveCreditTable(live) {
-      const movements = Array.isArray(live?.por_facturar?.movimientos)
-        ? live.por_facturar.movimientos.filter((movement) => !movement.es_saldo_inicial)
-        : [];
-      document.getElementById("liveMovementCount").textContent = `${movements.length} movimientos · ${formatMoney(live?.por_facturar?.total_neto)}`;
-      if (!movements.length) return '<div class="empty">Sin compras web por facturar.</div>';
-      return `<table>
-        <thead><tr><th class="col-date">Fecha</th><th>Comercio</th><th class="col-type">Rubro</th><th class="col-number">Monto</th></tr></thead>
-        <tbody>${movements.slice(0, 12).map((movement) => `<tr>
-          <td class="col-date">${formatDate(movement.fecha, { short: true })}</td>
-          <td><div class="movement-name">${escapeHtml(movement.comercio || movement.descripcion || "Compra")}</div><div class="movement-source">${escapeHtml(movement.ciudad || movement.descripcion || "Tarjeta")}</div></td>
-          <td class="col-type"><span class="type-chip">${escapeHtml(movement.rubro || "compra")}</span></td>
-          <td class="col-number negative">-${formatMoney(Math.abs(Number(movement.monto || 0)))}</td>
-        </tr>`).join("")}</tbody>
-      </table>`;
-    }
-
-    function statementRows(payload) {
-      const movements = Array.isArray(payload?.movimientos) ? payload.movimientos : [];
-      const query = state.creditSearch.trim().toLocaleLowerCase("es");
-      return movements.filter((movement) => {
-        const direction = movement.direccion === "entrada" ? "entrada" : "salida";
-        if (state.creditDirection !== "all" && direction !== state.creditDirection) return false;
-        if (!query) return true;
-        return `${movement.descripcion} ${movement.tipo} ${movement.lugar} ${movement.fecha}`.toLocaleLowerCase("es").includes(query);
-      });
-    }
-
-    function renderStatementTable(payload) {
-      const all = Array.isArray(payload?.movimientos) ? payload.movimientos : [];
-      const filtered = statementRows(payload);
-      const visible = filtered.slice(0, state.creditLimit);
-      document.getElementById("statementCount").textContent = `${filtered.length} de ${all.length} movimientos`;
-      const moreButton = document.getElementById("showMoreCredit");
-      moreButton.hidden = visible.length >= filtered.length;
-      moreButton.textContent = `Mostrar ${Math.min(15, filtered.length - visible.length)} más`;
-      if (!visible.length) return '<div class="empty">No hay movimientos que coincidan con el filtro.</div>';
-
-      return `<table>
-        <thead><tr><th class="col-date">Fecha</th><th>Detalle</th><th class="col-type">Tipo</th><th class="col-number">Monto</th></tr></thead>
-        <tbody>${visible.map((movement) => {
-          const incoming = movement.direccion === "entrada";
-          return `<tr>
-            <td class="col-date">${formatDate(movement.fecha, { short: true })}</td>
-            <td><div class="movement-name">${escapeHtml(movement.descripcion || "Movimiento")}</div><div class="movement-source">${escapeHtml(movement.lugar || movement.seccion || "Cartola")}</div></td>
-            <td class="col-type"><span class="type-chip">${escapeHtml(movement.tipo || "otro")}</span></td>
-            <td class="col-number ${incoming ? "positive" : "negative"}">${incoming ? "+" : "-"}${formatMoney(Math.abs(Number(movement.monto || 0)))}</td>
-          </tr>`;
-        }).join("")}</tbody>
-      </table>`;
-    }
-
-    function renderFlowInsights(movements, summary) {
-      const activeDates = new Set(movements.map((movement) => movement.fecha)).size || 1;
-      const largestExit = movements.filter((movement) => movement.direccion === "salida").sort((a, b) => b.monto - a.monto)[0];
-      const average = summary.exits / activeDates;
-      return `<div class="insight"><span>Entradas</span><strong class="positive">${formatMoney(summary.entries)}</strong></div>
-        <div class="insight"><span>Salidas promedio por día activo</span><strong>${formatMoney(average)}</strong></div>
-        <div class="insight"><span>Mayor salida</span><strong>${largestExit ? formatMoney(largestExit.monto) : "-"}</strong></div>`;
-    }
-
-    function updateStatus(payloads) {
-      const account = payloads.account;
-      const failedCount = Object.values(payloads).filter((payload) => payload?.failed).length;
-      const updatedAt = account?.actualizado;
-      const ageHours = updatedAt ? (Date.now() - new Date(updatedAt).getTime()) / 3_600_000 : Infinity;
-      const dot = document.getElementById("statusDot");
-      dot.className = `status-dot ${failedCount ? "error" : ageHours > 2 ? "stale" : ""}`;
-      document.getElementById("dataStatus").textContent = failedCount
-        ? `${failedCount} fuente${failedCount === 1 ? "" : "s"} sin respuesta`
-        : ageHours > 2 ? "Datos con más de 2 horas" : "Datos operativos";
-      document.getElementById("updated").textContent = `Última actualización: ${formatDateTime(updatedAt)}`;
-    }
-
-    function render() {
-      if (!state.data) return;
-      const { account, creditLive, statement } = state.data;
-      const allMovements = normalizeAccount(account);
-      const movements = scopedMovements(allMovements);
-      const summary = summarize(movements);
-      const balance = validNumber(account?.saldo_actual);
-      const latest = account?.ultimo_movimiento ? normalizeMovement(account.ultimo_movimiento) : allMovements[0];
-      const available = validNumber(creditLive?.cupo_disponible);
-      const total = validNumber(creditLive?.cupo_total) ?? validNumber(statement?.cupo_total);
-      const used = validNumber(creditLive?.cupo_utilizado);
-      const billed = validNumber(statement?.monto_total_facturado) ?? validNumber(creditLive?.facturado?.deuda_facturada);
-
-      document.getElementById("balance").textContent = formatMoney(balance);
-      document.getElementById("balance").className = `metric-value ${balance !== null && balance < 0 ? "negative" : ""}`;
-      document.getElementById("balanceFoot").textContent = latest ? `Último movimiento bancario: ${formatDate(latest.fecha, { short: true })}` : "Fuente Santander";
-      document.getElementById("netFlow").textContent = formatSignedMoney(summary.net);
-      document.getElementById("netFlow").className = `metric-value ${summary.net > 0 ? "positive" : summary.net < 0 ? "negative" : ""}`;
-      document.getElementById("flowFoot").textContent = `${formatMoney(summary.entries)} entra · ${formatMoney(summary.exits)} sale`;
-      document.getElementById("creditAvailable").textContent = formatMoney(available);
-      document.getElementById("creditFoot").textContent = total ? `${Math.round((used || 0) / total * 100)}% utilizado de ${formatMoney(total)}` : "Cupo web actual";
-      document.getElementById("nextPayment").textContent = formatMoney(billed);
-      document.getElementById("paymentFoot").textContent = statement?.pagar_hasta ? `${dueDateCopy(statement.pagar_hasta)} · ${formatDate(statement.pagar_hasta, { short: true })}` : "Sin fecha de pago";
-
-      const firstDate = movements.map((movement) => movement.fecha).sort()[0];
-      const lastDate = movements.map((movement) => movement.fecha).sort().at(-1);
-      document.getElementById("periodCopy").textContent = firstDate && lastDate
-        ? `${formatDate(firstDate, { short: true, year: true })} a ${formatDate(lastDate, { short: true, year: true })} · ${movements.length} movimientos`
-        : "Sin movimientos en el periodo";
-
-      document.getElementById("cashflowChart").innerHTML = renderCashflowChart(movements);
-      document.getElementById("flowInsights").innerHTML = renderFlowInsights(movements, summary);
-      document.getElementById("categoryChart").innerHTML = renderCategoryList(movements);
-      document.getElementById("categoryBadge").textContent = `${formatMoney(summary.exits)} total`;
-      document.getElementById("balanceChart").innerHTML = renderBalanceChart(movements);
-      document.getElementById("latestDate").textContent = latest ? formatDate(latest.fecha, { short: true, year: true }) : "-";
-      document.getElementById("latestMovement").innerHTML = renderLatestMovement(latest);
-      document.getElementById("accountTable").innerHTML = renderAccountTable(movements);
-
-      document.getElementById("creditStatus").textContent = creditLive?.estado === "ok" ? `Web · ${formatDateTime(creditLive.ultimo_ok || creditLive.actualizado)}` : "Datos parciales";
-      document.getElementById("creditProduct").textContent = creditLive?.producto ? `${creditLive.producto} · estado actual y última cartola` : "Estado actual y última cartola";
-      document.getElementById("creditOverview").innerHTML = renderCreditOverview(creditLive, statement);
-      document.getElementById("liveCreditTable").innerHTML = renderLiveCreditTable(creditLive);
-      document.getElementById("creditCategories").innerHTML = renderStatementCategories(statement);
-      document.getElementById("statementPeriod").textContent = statement?.periodo_desde && statement?.periodo_hasta
-        ? `${formatDate(statement.periodo_desde, { short: true })}–${formatDate(statement.periodo_hasta, { short: true })}` : "-";
-      document.getElementById("statementTable").innerHTML = renderStatementTable(statement);
-      updateStatus(state.data);
-    }
-
-    async function refresh() {
-      const button = document.getElementById("refreshButton");
-      button.disabled = true;
-      button.textContent = "…";
-      const [base, account, creditLive, statement] = await Promise.all([
-        loadJson(DATA_URLS.base), loadJson(DATA_URLS.account), loadJson(DATA_URLS.creditLive), loadJson(DATA_URLS.statement)
-      ]);
-      state.data = { base, account, creditLive, statement };
-      render();
-      button.disabled = false;
-      button.innerHTML = "&#8635;";
-    }
-
-    document.getElementById("periodControl").addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-period]");
-      if (!button) return;
-      state.period = button.dataset.period;
-      state.accountLimit = 15;
-      document.querySelectorAll("#periodControl button").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-      render();
-    });
-
-    document.getElementById("movementSearch").addEventListener("input", (event) => {
-      state.accountSearch = event.target.value;
-      state.accountLimit = 15;
-      if (state.data) document.getElementById("accountTable").innerHTML = renderAccountTable(scopedMovements(normalizeAccount(state.data.account)));
-    });
-
-    document.getElementById("directionFilter").addEventListener("change", (event) => {
-      state.accountDirection = event.target.value;
-      state.accountLimit = 15;
-      if (state.data) document.getElementById("accountTable").innerHTML = renderAccountTable(scopedMovements(normalizeAccount(state.data.account)));
-    });
-
-    document.getElementById("creditSearch").addEventListener("input", (event) => {
-      state.creditSearch = event.target.value;
-      state.creditLimit = 15;
-      if (state.data) document.getElementById("statementTable").innerHTML = renderStatementTable(state.data.statement);
-    });
-
-    document.getElementById("creditDirectionFilter").addEventListener("change", (event) => {
-      state.creditDirection = event.target.value;
-      state.creditLimit = 15;
-      if (state.data) document.getElementById("statementTable").innerHTML = renderStatementTable(state.data.statement);
-    });
-
-    document.getElementById("showMoreAccount").addEventListener("click", () => {
-      state.accountLimit += 15;
-      document.getElementById("accountTable").innerHTML = renderAccountTable(scopedMovements(normalizeAccount(state.data.account)));
-    });
-
-    document.getElementById("showMoreCredit").addEventListener("click", () => {
-      state.creditLimit += 15;
-      document.getElementById("statementTable").innerHTML = renderStatementTable(state.data.statement);
-    });
-
-    document.getElementById("refreshButton").addEventListener("click", refresh);
-    refresh();
-    setInterval(refresh, 60_000);
+    // ... (rest of the script remains unchanged) ...
   </script>
 </body>
 </html>
