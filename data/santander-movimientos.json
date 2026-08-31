@@ -1,22 +1,61 @@
 {
   "titulo": "Santander",
   "moneda": "CLP",
-  "actualizado": "2026-08-21T01:30:02.328Z",
-  "saldo_actual": 4408,
+  "actualizado": "2026-08-25T05:55:45.568Z",
+  "saldo_actual": 20722,
   "ultimo_movimiento": {
-    "fecha": "2026-08-21",
+    "fecha": "2026-08-24",
     "hora": "",
     "direccion": "salida",
-    "tipo": "pago",
-    "destino": "SERVICIOS Y COMERCIAL",
-    "monto": 1790,
-    "saldo": 4408,
+    "tipo": "otro",
+    "destino": "OPENAI *CHATGPT SUBSCR",
+    "monto": 22336,
+    "saldo": 20722,
     "source_order": 0,
     "es_sueldo": false,
     "fuente": "santander-descarga",
-    "uid": "santander-tsv-3aed77663d87540bda"
+    "uid": "santander-tsv-2a0c9d112b45cc6b1f"
   },
   "movimientos": [
+    {
+      "fecha": "2026-08-24",
+      "hora": "",
+      "direccion": "salida",
+      "tipo": "otro",
+      "destino": "OPENAI *CHATGPT SUBSCR",
+      "monto": 22336,
+      "saldo": 20722,
+      "source_order": 0,
+      "es_sueldo": false,
+      "fuente": "santander-descarga",
+      "uid": "santander-tsv-2a0c9d112b45cc6b1f"
+    },
+    {
+      "fecha": "2026-08-24",
+      "hora": "",
+      "direccion": "entrada",
+      "tipo": "transferencia",
+      "destino": "0214402912 TRANSF. SEBASTIAN IGNACIO MORA",
+      "monto": 40000,
+      "saldo": 43058,
+      "source_order": 1,
+      "es_sueldo": false,
+      "fuente": "santander-descarga",
+      "uid": "santander-tsv-695bd53306d21c9289"
+    },
+    {
+      "fecha": "2026-08-21",
+      "hora": "",
+      "direccion": "salida",
+      "tipo": "pago",
+      "destino": "SERVICIOS Y COMERCIAL",
+      "monto": 1350,
+      "saldo": 3058,
+      "source_order": 2,
+      "es_sueldo": false,
+      "fuente": "santander-descarga",
+      "uid": "santander-tsv-ac0d777323db626127"
+    },
     {
       "fecha": "2026-08-21",
       "hora": "",
@@ -25,7 +64,7 @@
       "destino": "SERVICIOS Y COMERCIAL",
       "monto": 1790,
       "saldo": 4408,
-      "source_order": 0,
+      "source_order": 3,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-3aed77663d87540bda"
@@ -38,7 +77,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 815,
       "saldo": 6198,
-      "source_order": 1,
+      "source_order": 4,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-c115445806acf4efb0"
@@ -51,7 +90,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 1790,
       "saldo": 7013,
-      "source_order": 2,
+      "source_order": 5,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-4b88255c2c408bff2d"
@@ -64,7 +103,7 @@
       "destino": "COMPRA NACIONAL VD FARMACIAS AYSEN",
       "monto": 1490,
       "saldo": 8803,
-      "source_order": 3,
+      "source_order": 6,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-940892e8a30e780fac"
@@ -77,7 +116,7 @@
       "destino": "COMPRA NACIONAL VD FARMACIAS AYSEN",
       "monto": 8990,
       "saldo": 10293,
-      "source_order": 4,
+      "source_order": 7,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-c60d12c1871cbce1be"
@@ -90,7 +129,7 @@
       "destino": "COMPRA NACIONAL VD LOS PAISAS",
       "monto": 2586,
       "saldo": 19283,
-      "source_order": 5,
+      "source_order": 8,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-26b8603f01bf196664"
@@ -103,7 +142,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 815,
       "saldo": 21869,
-      "source_order": 6,
+      "source_order": 9,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-8e44594c0cc32d1a25"
@@ -116,7 +155,7 @@
       "destino": "KIOSKS WENDYS COSTANER",
       "monto": 20570,
       "saldo": 22684,
-      "source_order": 7,
+      "source_order": 10,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-d2bb5238d11d949de4"
@@ -129,7 +168,7 @@
       "destino": "COMPRA NACIONAL VD PORTAL LA REINA",
       "monto": 31980,
       "saldo": 43254,
-      "source_order": 8,
+      "source_order": 11,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-329facbaf849a754be"
@@ -142,7 +181,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 1710,
       "saldo": 75234,
-      "source_order": 9,
+      "source_order": 12,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-62687a10e17315ac58"
@@ -155,7 +194,7 @@
       "destino": "MERCADOPAGO*LATERNERAM",
       "monto": 7500,
       "saldo": 76944,
-      "source_order": 10,
+      "source_order": 13,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-9122c58c7aabf59d93"
@@ -168,7 +207,7 @@
       "destino": "MERCADOPAGO*EYZAGUIRRE",
       "monto": 4300,
       "saldo": 84444,
-      "source_order": 11,
+      "source_order": 14,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-ccbbae4352cb039195"
@@ -181,7 +220,7 @@
       "destino": "MERCADOPAGO*PAPACHECOS",
       "monto": 6985,
       "saldo": 88744,
-      "source_order": 12,
+      "source_order": 15,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-07a2ca3d8dc0492d15"
@@ -194,7 +233,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 1630,
       "saldo": 95729,
-      "source_order": 13,
+      "source_order": 16,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-cadfee715d8ec470d9"
@@ -207,7 +246,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 815,
       "saldo": 97359,
-      "source_order": 14,
+      "source_order": 17,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-34c394a6ab3d0129a3-2"
@@ -220,7 +259,7 @@
       "destino": "COMPRA NACIONAL VD E-UCC2",
       "monto": 5890,
       "saldo": 98174,
-      "source_order": 15,
+      "source_order": 18,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-ab63604224abda0e69"
@@ -233,7 +272,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 815,
       "saldo": 104064,
-      "source_order": 16,
+      "source_order": 19,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-34c394a6ab3d0129a3"
@@ -246,7 +285,7 @@
       "destino": "PAGOS RECURRENTE INTERNACIONAL VD PARAMOUNT+",
       "monto": 5690,
       "saldo": 104879,
-      "source_order": 17,
+      "source_order": 20,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-4d13fe950da6a3d1dc"
@@ -259,7 +298,7 @@
       "destino": "SERVICIOS Y COMERCIAL",
       "monto": 1390,
       "saldo": 110569,
-      "source_order": 18,
+      "source_order": 21,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-4eddbf5e1a4783725f"
@@ -272,7 +311,7 @@
       "destino": "UCATOLICA SEDE CENTRAL",
       "monto": 7290,
       "saldo": 111959,
-      "source_order": 19,
+      "source_order": 22,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-0e1e58c64bb2f6b1db"
@@ -285,7 +324,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 815,
       "saldo": 119249,
-      "source_order": 20,
+      "source_order": 23,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-8ea9715c01d66a454e"
@@ -298,7 +337,7 @@
       "destino": "0165728866 TRANSF A MONICA",
       "monto": 45000,
       "saldo": 120064,
-      "source_order": 21,
+      "source_order": 24,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-51a4e054aa6dcd1aef"
@@ -311,7 +350,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 895,
       "saldo": 165064,
-      "source_order": 22,
+      "source_order": 25,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-c2c65642e330608cae"
@@ -324,7 +363,7 @@
       "destino": "0203508751 TRANSF. FRANCIA ABRIL SEP?UACU",
       "monto": 10780,
       "saldo": 165959,
-      "source_order": 23,
+      "source_order": 26,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-c257ced7defa7211df"
@@ -337,7 +376,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 815,
       "saldo": 155179,
-      "source_order": 24,
+      "source_order": 27,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-4087f26ea1a1130fac-2"
@@ -350,7 +389,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 815,
       "saldo": 155994,
-      "source_order": 25,
+      "source_order": 28,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-4087f26ea1a1130fac"
@@ -363,7 +402,7 @@
       "destino": "COMPRA NACIONAL VD THE COFFEE",
       "monto": 2800,
       "saldo": 156809,
-      "source_order": 26,
+      "source_order": 29,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-8da9dca9ba8aa7b2f2"
@@ -376,7 +415,7 @@
       "destino": "COMPRA NACIONAL VD TUU*MONYEV SPA",
       "monto": 25410,
       "saldo": 159609,
-      "source_order": 27,
+      "source_order": 30,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-a9b7f1d5a339e74ea0"
@@ -389,7 +428,7 @@
       "destino": "DON SALVA SANTO DOMING",
       "monto": 1890,
       "saldo": 185019,
-      "source_order": 28,
+      "source_order": 31,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-13fdf2b9dd4245a09e"
@@ -402,7 +441,7 @@
       "destino": "SERVICIOS Y COMERCIAL",
       "monto": 5540,
       "saldo": 186909,
-      "source_order": 29,
+      "source_order": 32,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-1300a89c12592bcbde"
@@ -415,7 +454,7 @@
       "destino": "MERCADOPAGO*VIKINGOTOB",
       "monto": 4500,
       "saldo": 192449,
-      "source_order": 30,
+      "source_order": 33,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-6d4b94de2010d41dfc"
@@ -428,7 +467,7 @@
       "destino": "010752715K TRANSF. ARROYO CORTES VERONICA DEL CARMEN",
       "monto": 20000,
       "saldo": 196949,
-      "source_order": 31,
+      "source_order": 34,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-763a295808cd5cb22b"
@@ -441,7 +480,7 @@
       "destino": "RIPLEY COSTANERA CENTE",
       "monto": 20000,
       "saldo": 176949,
-      "source_order": 32,
+      "source_order": 35,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-ccecc8036d9745d09a"
@@ -454,7 +493,7 @@
       "destino": "CASA IDEAS COSTANERA C",
       "monto": 16980,
       "saldo": 196949,
-      "source_order": 33,
+      "source_order": 36,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-48b22560798c16d85c"
@@ -467,7 +506,7 @@
       "destino": "COMPRA NACIONAL VD TUU*TAKEYA",
       "monto": 33550,
       "saldo": 213929,
-      "source_order": 34,
+      "source_order": 37,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-ef30ec581fe7423805"
@@ -480,7 +519,7 @@
       "destino": "0205701087 TRANSF A MATIAS RODRIGO VERGARA ARROYOPREPAGO DE NUMERO DE CUENTA",
       "monto": 3000,
       "saldo": 247479,
-      "source_order": 35,
+      "source_order": 38,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-a501ad5d8aa86a00c4"
@@ -493,7 +532,7 @@
       "destino": "RED MOVILIDAD SANTIAGO",
       "monto": 1630,
       "saldo": 250479,
-      "source_order": 36,
+      "source_order": 39,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-a789ef9e751dce657f"
@@ -506,7 +545,7 @@
       "destino": "MERCADOPAGO*PANAMPARIT",
       "monto": 1600,
       "saldo": 252109,
-      "source_order": 37,
+      "source_order": 40,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-1a7d92766a58e110dc"
@@ -519,7 +558,7 @@
       "destino": "COMPRA NACIONAL VD SUCURSAL PUC",
       "monto": 3843,
       "saldo": 253709,
-      "source_order": 38,
+      "source_order": 41,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-9b848cb919ae0c28f3"
@@ -532,7 +571,7 @@
       "destino": "Interés Sobregiro Cta.Corriente",
       "monto": 1,
       "saldo": 257552,
-      "source_order": 39,
+      "source_order": 42,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-a923bed9b9d59eedee"
@@ -545,7 +584,7 @@
       "destino": "0205701087 TRANSF A MATIAS RODRIGO VERGARA ARROYOPREPAGO DE NUMERO DE CUENTA",
       "monto": 7000,
       "saldo": 257553,
-      "source_order": 40,
+      "source_order": 43,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-2f62ec5b68018169d7"
@@ -558,7 +597,7 @@
       "destino": "0079738077 TRANSF. CARLOS HUMBERTO GALLARDO INFANTE",
       "monto": 15000,
       "saldo": 264553,
-      "source_order": 41,
+      "source_order": 44,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-d3534d389b90f7b0b6"
@@ -571,7 +610,7 @@
       "destino": "COMPRA NACIONAL VD EL GALEON",
       "monto": 53372,
       "saldo": 249553,
-      "source_order": 42,
+      "source_order": 45,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-3167556a8ff5100ffa"
@@ -584,7 +623,7 @@
       "destino": "0205701087 TRANSF. MATIAS RODRIGO VERGARA",
       "monto": 56000,
       "saldo": 302925,
-      "source_order": 43,
+      "source_order": 46,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-834e5a62fea41b519e"
@@ -597,7 +636,7 @@
       "destino": "MERCADOPAGO*PRODUCTOSS",
       "monto": 3900,
       "saldo": 246925,
-      "source_order": 44,
+      "source_order": 47,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-fa8d115cfb03923a64"
@@ -610,7 +649,7 @@
       "destino": "0761165755 TRANSF A NAUTA",
       "monto": 500000,
       "saldo": 250825,
-      "source_order": 45,
+      "source_order": 48,
       "es_sueldo": false,
       "fuente": "santander-descarga",
       "uid": "santander-tsv-79c1ce2c422b0ca09f"
@@ -623,49 +662,10 @@
       "destino": "OPENAI *CHATGPT SUBSCR",
       "monto": 22618,
       "saldo": 750825,
-      "source_order": 46,
-      "es_sueldo": false,
-      "fuente": "santander-descarga",
-      "uid": "santander-tsv-dfeb94fefe4e65ed67"
-    },
-    {
-      "fecha": "2026-08-03",
-      "hora": "",
-      "direccion": "salida",
-      "tipo": "otro",
-      "destino": "COMERCIAL Y AGRICOLA A",
-      "monto": 11700,
-      "saldo": 773443,
-      "source_order": 47,
-      "es_sueldo": false,
-      "fuente": "santander-descarga",
-      "uid": "santander-tsv-1bbb3c5f538c4cf6c9"
-    },
-    {
-      "fecha": "2026-08-03",
-      "hora": "",
-      "direccion": "salida",
-      "tipo": "otro",
-      "destino": "020653642K TRANSF A JOSE RUT",
-      "monto": 183000,
-      "saldo": 785143,
-      "source_order": 48,
-      "es_sueldo": false,
-      "fuente": "santander-descarga",
-      "uid": "santander-tsv-4a5c3a7dea9533ba15"
-    },
-    {
-      "fecha": "2026-08-03",
-      "hora": "",
-      "direccion": "salida",
-      "tipo": "transferencia",
-      "destino": "Traspaso Internet a T. Crédito",
-      "monto": 201383,
-      "saldo": 968143,
       "source_order": 49,
       "es_sueldo": false,
       "fuente": "santander-descarga",
-      "uid": "santander-tsv-d23618c630af5201de"
+      "uid": "santander-tsv-dfeb94fefe4e65ed67"
     }
   ]
 }

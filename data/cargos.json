@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "saldo_inicial": 391,
   "inicio_periodo": "2026-07-27T17:31:57.506610Z",
-  "actualizado": "2026-08-18T10:58:22.268711-04:00",
+  "actualizado": "2026-08-31T13:02:32.337795-04:00",
   "movimientos": [
     {
       "direccion": "salida",
@@ -85,6 +85,28 @@
       "uid": "2100",
       "fecha": "2026-08-10",
       "hora": "16:00"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Isidora Conejeros Donoso",
+      "monto": 10000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2153",
+      "fecha": "2026-08-26",
+      "hora": "09:28"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Catalina Lissette Mendez",
+      "monto": 20500,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2154",
+      "fecha": "2026-08-26",
+      "hora": "09:31"
     }
   ]
 }
