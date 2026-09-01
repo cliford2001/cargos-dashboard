@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "saldo_inicial": 391,
   "inicio_periodo": "2026-07-27T17:31:57.506610Z",
-  "actualizado": "2026-08-31T13:02:32.337795-04:00",
+  "actualizado": "2026-09-01T14:27:15.936715-04:00",
   "movimientos": [
     {
       "direccion": "salida",
@@ -107,6 +107,28 @@
       "uid": "2154",
       "fecha": "2026-08-26",
       "hora": "09:31"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Kalpana",
+      "monto": 120000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2185",
+      "fecha": "2026-09-01",
+      "hora": "14:16"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Jose",
+      "monto": 183000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2186",
+      "fecha": "2026-09-01",
+      "hora": "14:20"
     }
   ]
 }
