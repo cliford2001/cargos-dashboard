@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "saldo_inicial": 391,
   "inicio_periodo": "2026-07-27T17:31:57.506610Z",
-  "actualizado": "2026-09-01T14:27:15.936715-04:00",
+  "actualizado": "2026-09-01T16:40:22.067929-04:00",
   "movimientos": [
     {
       "direccion": "salida",
@@ -129,6 +129,17 @@
       "uid": "2186",
       "fecha": "2026-09-01",
       "hora": "14:20"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "abono",
+      "destino": "Tarjeta de Crédito WORLDMEMBER VISA **** **** **** 7026",
+      "monto": 166858,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2188",
+      "fecha": "2026-09-01",
+      "hora": "16:35"
     }
   ]
 }
