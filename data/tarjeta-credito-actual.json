@@ -2,7 +2,7 @@
   "titulo": "Tarjeta de credito Santander actual",
   "fuente": "santander-web",
   "estado": "ok",
-  "actualizado": "2026-09-01T21:03:44.964Z",
+  "actualizado": "2026-09-02T14:53:13.380Z",
   "url": "https://mibanco.santander.cl/UI.Web.HB/Private_new/frame/#/private/Saldos_TC/main/billed",
   "mensaje": "",
   "facturado": {
@@ -106,16 +106,9 @@
   },
   "referencia": [
     "Cupo Disponible",
-    "$276.070",
-    "01/09/2026 PAGO +$166.858",
-    "28/08/2026 Red Movilidad Santiago -$815",
-    "27/08/2026 MERCADOPAGO*INVERPEGONSPA -$4.400",
-    "SUCURSAL PUC -$3.976",
-    "25/08/2026 ANTHROPIC* CLAUDE SUB -$22.260",
-    "FUXI -$2.600",
-    "SALDO INICIAL -$132.807"
+    "$276.070"
   ],
-  "ultimo_ok": "2026-09-01T21:03:44.964Z",
+  "ultimo_ok": "2026-09-02T14:53:13.380Z",
   "cupo_total": 500000,
   "cupo_utilizado": 223930,
   "cupo_disponible": 276070,

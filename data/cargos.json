@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "saldo_inicial": 391,
   "inicio_periodo": "2026-07-27T17:31:57.506610Z",
-  "actualizado": "2026-09-01T17:10:42.491236-04:00",
+  "actualizado": "2026-09-02T11:59:54.174931-04:00",
   "movimientos": [
     {
       "direccion": "salida",
@@ -151,6 +151,17 @@
       "uid": "2189",
       "fecha": "2026-09-01",
       "hora": "17:06"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Natalia Poblete",
+      "monto": 80000,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2194",
+      "fecha": "2026-09-02",
+      "hora": "11:43"
     }
   ]
 }
