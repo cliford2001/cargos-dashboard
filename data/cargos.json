@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "saldo_inicial": 391,
   "inicio_periodo": "2026-07-27T17:31:57.506610Z",
-  "actualizado": "2026-09-02T11:59:54.174931-04:00",
+  "actualizado": "2026-09-02T17:47:04.807587-04:00",
   "movimientos": [
     {
       "direccion": "salida",
@@ -162,6 +162,21 @@
       "uid": "2194",
       "fecha": "2026-09-02",
       "hora": "11:43"
+    },
+    {
+      "direccion": "entrada",
+      "tipo": "inversion",
+      "destino": "DVA Silicon Fund",
+      "monto": 101403,
+      "moneda_orig": "USD",
+      "monto_orig": 106.74,
+      "folio": "217662",
+      "is_solicitud": true,
+      "es_sueldo": false,
+      "fuente": "nauta",
+      "uid": "2198",
+      "fecha": "2026-09-02",
+      "hora": "21:36"
     }
   ]
 }
