@@ -2,7 +2,7 @@
   "titulo": "Tarjeta de credito Santander actual",
   "fuente": "santander-web",
   "estado": "ok",
-  "actualizado": "2026-09-02T21:20:31.284Z",
+  "actualizado": "2026-09-03T14:38:15.980Z",
   "url": "https://mibanco.santander.cl/UI.Web.HB/Private_new/frame/#/private/Saldos_TC/main/billed",
   "mensaje": "",
   "facturado": {
@@ -21,10 +21,32 @@
     "cupo_utilizado_cierre": 0
   },
   "por_facturar": {
-    "total_cargos": 34051,
+    "total_cargos": 95751,
     "total_abonos": 166858,
-    "total_neto": -132807,
+    "total_neto": -71107,
     "movimientos": [
+      {
+        "fecha": "2026-09-01",
+        "descripcion": "COMPRAS P.A.T.",
+        "comercio": "SMART FIT GIMNASIOS",
+        "rubro": "SERV. DE RECREACION",
+        "ciudad": "SANTIAGO",
+        "monto": 26800,
+        "direccion": "salida",
+        "es_saldo_inicial": false,
+        "source_order": 0
+      },
+      {
+        "fecha": "2026-09-01",
+        "descripcion": "COMPRAS P.A.T.",
+        "comercio": "SMART FIT GIMNASIOS",
+        "rubro": "SERV. DE RECREACION",
+        "ciudad": "SANTIAGO",
+        "monto": 34900,
+        "direccion": "salida",
+        "es_saldo_inicial": false,
+        "source_order": 1
+      },
       {
         "fecha": "2026-09-01",
         "descripcion": "PAGO",
@@ -34,7 +56,7 @@
         "monto": 166858,
         "direccion": "entrada",
         "es_saldo_inicial": false,
-        "source_order": 0
+        "source_order": 2
       },
       {
         "fecha": "2026-08-28",
@@ -45,7 +67,7 @@
         "monto": 815,
         "direccion": "salida",
         "es_saldo_inicial": false,
-        "source_order": 1
+        "source_order": 3
       },
       {
         "fecha": "2026-08-27",
@@ -56,7 +78,7 @@
         "monto": 4400,
         "direccion": "salida",
         "es_saldo_inicial": false,
-        "source_order": 2
+        "source_order": 4
       },
       {
         "fecha": "2026-08-27",
@@ -67,7 +89,7 @@
         "monto": 3976,
         "direccion": "salida",
         "es_saldo_inicial": false,
-        "source_order": 3
+        "source_order": 5
       },
       {
         "fecha": "2026-08-25",
@@ -78,7 +100,7 @@
         "monto": 22260,
         "direccion": "salida",
         "es_saldo_inicial": false,
-        "source_order": 4
+        "source_order": 6
       },
       {
         "fecha": "2026-08-25",
@@ -89,7 +111,7 @@
         "monto": 2600,
         "direccion": "salida",
         "es_saldo_inicial": false,
-        "source_order": 5
+        "source_order": 7
       },
       {
         "fecha": "2026-08-25",
@@ -100,15 +122,15 @@
         "monto": 132807,
         "direccion": "salida",
         "es_saldo_inicial": true,
-        "source_order": 6
+        "source_order": 8
       }
     ]
   },
   "referencia": [],
-  "ultimo_ok": "2026-09-02T21:20:31.284Z",
+  "ultimo_ok": "2026-09-03T14:38:15.980Z",
   "cupo_total": 500000,
-  "cupo_utilizado": 223930,
-  "cupo_disponible": 276070,
+  "cupo_utilizado": 285630,
+  "cupo_disponible": 214370,
   "producto": "WORLDMEMBER VISA",
   "moneda": "CLP"
 }

@@ -3,7 +3,7 @@
   "moneda": "CLP",
   "saldo_inicial": 391,
   "inicio_periodo": "2026-07-27T17:31:57.506610Z",
-  "actualizado": "2026-09-02T17:47:04.807587-04:00",
+  "actualizado": "2026-09-03T10:40:28.544671-04:00",
   "movimientos": [
     {
       "direccion": "salida",
@@ -177,6 +177,17 @@
       "uid": "2198",
       "fecha": "2026-09-02",
       "hora": "21:36"
+    },
+    {
+      "direccion": "salida",
+      "tipo": "transferencia",
+      "destino": "Juan Cristobal Alfaro Garrido",
+      "monto": 55200,
+      "es_sueldo": false,
+      "fuente": "santander",
+      "uid": "2202",
+      "fecha": "2026-09-03",
+      "hora": "10:29"
     }
   ]
 }
